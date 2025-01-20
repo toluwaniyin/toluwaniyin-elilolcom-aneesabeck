@@ -3,12 +3,13 @@ import "./Dashboard.css";
 import Header from "../modules/Header";
 import Stats from "../modules/Stats";
 import Trees from "../modules/Trees";
+import CreateTreeButton from "../modules/CreateTreeButton";
 
 const Dashboard = () => {
     // hardcoded data
     const userName = "Lolade";
     const [stats] = useState({streak: 0, treeNo});
-    const [trees] = useState({});
+    const [trees] = useState(["Tree 1", "Tree 2"]);
 
     return (
         <div className ="dashboard-header">
@@ -20,7 +21,7 @@ const Dashboard = () => {
                 <Trees trees = {trees} /> 
             </div>
             <div className ="dashboard-button">
-                <Creat
+                <CreateTreeButton onClick = {createNewTree}/>
             </div>
         </div>
         

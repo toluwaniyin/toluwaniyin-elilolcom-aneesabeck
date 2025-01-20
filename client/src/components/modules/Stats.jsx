@@ -1,5 +1,4 @@
 import React from "react";
-import "./Stats.css";
 
 const Stats = ({ stats }) => {
     return(
