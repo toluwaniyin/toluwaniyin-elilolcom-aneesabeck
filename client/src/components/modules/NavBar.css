@@ -1,0 +1,10 @@
+.NavBar-title {
+    color: #ffffff;
+    font-size: 40px;
+    font-family: "Lobster Two";
+}
+
+.NavBar-container {
+    padding: 8px 16px;
+    color: #3F9B0B;
+}
