@@ -60,46 +60,11 @@ app.use(validator.checkRoutes);
 // allow us to process POST requests
 app.use(express.json());
 
-//GET /api/trees endpoint
-const tree1 = {
-  _id: "tree1",
-  tree_name: "study tree",
-  image: "/treeicon.jpg"
-};
 
-const tree2 = {
-  _id: "tree2",
-  tree_name: "python tree",
-  image: "../treeicon.jpg"
-};
 
-const tree3 = {
-  _id: "tree3",
-  tree_name: "c++ tree",
-  image: "../treeicon.jpg"
-};
+const router = require("./api")
 
-const trees = [tree1, tree2, tree3];
 
-app.get("/api/trees", (req, res) => {
-  res.send(trees)
-})
-
-//POST /api/trees endpoint
-
-//GET /api/streaks endpoint
-const streak = {
-  day: 7;
-}
-
-app.get("/api/streak", (req, res) => {
-  res.send(streak);
-});
-
-//POST /api/streaks endpoint
-app.post('/api/streaks', (req, res) => {
-  const days
-})
 
 // set up a session, which will persist login data across requests
 app.use(
@@ -114,6 +79,8 @@ app.use(
 // this checks if the user is logged in, and populates "req.user"
 app.use(auth.populateCurrentUser);
 
+
+app.use("/api", router);
 // connect user-defined routes
 app.use("/api", api);
 
