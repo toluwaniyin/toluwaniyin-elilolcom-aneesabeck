@@ -4,7 +4,7 @@ const handleCreateTree = (props) => {
     const addTree = (treeName) => {
         const body = { name: treeName };  // fill in body with value
         // // props.createNewTree({_id: })
-        post("/api/trees", body).then((tree)=>props.createNewTree(tree))
+        post("/api/trees", body).then((tree)=>props.createTree(tree))
     }
     return <CreateTreeButton onClick={addTree} />
 }

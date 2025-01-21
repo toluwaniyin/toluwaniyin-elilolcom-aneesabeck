@@ -64,6 +64,7 @@ const Dashboard = () => {
 
     return (
         <div>
+            <handleCreateTree createTree = {createNewTree}/>
             <Header />
             <div> 
                 {hasTrees ? (
@@ -71,7 +72,7 @@ const Dashboard = () => {
                 ) : (
                     <p>No trees available.</p>
                 )}
-                
+            
             </div>
         </div>
     );
