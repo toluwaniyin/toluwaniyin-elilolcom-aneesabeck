@@ -8,15 +8,34 @@ import CreateTreeButton from "../modules/CreateTreeButton";
 const Dashboard = () => {
     // hardcoded data
     const userName = "Lolade";
-    const [stats, setStats] = useState({streak: 0, treeNo});
-    const [trees, setTrees] = useState(["Tree 1", "Tree 2"]);
+    const [stats, setStreak] = useState(0);
+    const [treeNo, settreeNo] = useState(0)
+    const [trees, setTrees] = useState([]);
 
 
-//should only post a tree to the backend when clicks on create new tree
-//then clicks on finish new tree
+    //get streaks
+    useEffect (() =>{
+        get("/api/streak").then((streakResponse) => {
+            let streak = streakResponse;
+            setStreak(streak)
+        })
+    })
+
+    //post streaks
+    
 
 
-// promise to get trees?
+    // get treeNo
+
+
+    //posttreeNo
+    //needs create new tree button
+
+    //post treeObj to backend
+    //needs create new tree button
+
+
+// promise to get trees
     useEffect (() => {
         get("/api/trees").then((treesResponse) => {
             //list trees in reverse order
@@ -25,22 +44,27 @@ const Dashboard = () => {
         });
     }, []);
 
-    return (
-        <div className ="dashboard-header">
-            <Header userName = {userName}></Header>
-            <div className="dashboard-stats">
-                <Stats stats = {stats} />
-            </div>
-            <div className="dashboard-trees">
-                <Trees trees = {trees} />
-            </div>
-            <div className ="dashboard-button">
-                <CreateTreeButton onClick = {createNewTree}/>
-            </div>
-        </div>
+    let treesList = null;
+    const hasTrees = stories.length !== 0;
+    if (hasTrees) {
+        //not sure why we passed in treeObj
+        treesList = trees.map((treeObj)) => (
+            <TreeCard
+                key = {'TreeCard_${treeObj._id}'}
+                name = {treeObj.name}
+            />
+        )
+    }
 
+    return (
+        <div>
+            {hasTrees ? (
+                <div>{treesList}</div>
+            ) : (
+                <p>No trees available.</p>
+            )}
+        </div>
     );
 };
-
 
 export default Dashboard;

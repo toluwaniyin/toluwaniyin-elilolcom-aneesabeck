@@ -60,8 +60,7 @@ app.use(validator.checkRoutes);
 // allow us to process POST requests
 app.use(express.json());
 
-//implement GET /api/trees endpoint
-
+//GET /api/trees endpoint
 const tree1 = {
   _id: "tree1",
   tree_name: "study tree",
@@ -83,7 +82,23 @@ const tree3 = {
 const trees = [tree1, tree2, tree3];
 
 app.get("/api/trees", (req, res) => {
-  res.send(Trees.jsx)
+  res.send(trees)
+})
+
+//POST /api/trees endpoint
+
+//GET /api/streaks endpoint
+const streak = {
+  day: 7;
+}
+
+app.get("/api/streak", (req, res) => {
+  res.send(streak);
+});
+
+//POST /api/streaks endpoint
+app.post('/api/streaks', (req, res) => {
+  const days
 })
 
 // set up a session, which will persist login data across requests
