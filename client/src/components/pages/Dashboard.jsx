@@ -74,7 +74,6 @@ const Dashboard = () => {
                 ) : (
                     <p>No trees available.</p>
                 )}
-                <CreateTreeButton onClick = {createNewTree} />
             </div>
         </div>
     );
