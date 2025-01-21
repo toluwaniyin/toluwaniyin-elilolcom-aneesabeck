@@ -49,14 +49,14 @@ const App = () => {
   };
 
   return (
-    // <UserContext.Provider value={authContextValue}>
-    //   <Outlet />
-    // </UserContext.Provider>
-    <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-    <div className ="App-container">
-        <Dashboard path = "/" userId={userId} />
+    <UserContext.Provider value={authContextValue}>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <div className="App-container">
+        <Outlet />
+        <Dashboard path="/" userId={userId} />
         <NotFound default />
-      
+      </div>
+    </UserContext.Provider>
     </div>
   );
 };
