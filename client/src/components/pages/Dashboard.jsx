@@ -55,7 +55,7 @@ const Dashboard = () => {
                 //tree_name ??
                 name = {treeObj.name}
             />
-        ));
+        )
     }
 
     //POST trees
@@ -66,6 +66,7 @@ const Dashboard = () => {
 
     return (
         <div>
+            <handleCreateTree createTree = {createNewTree}/>
             <Header />
             <div>
                 {hasTrees ? (
@@ -74,7 +75,6 @@ const Dashboard = () => {
                     <p>No trees available.</p>
                 )}
                 <CreateTreeButton onClick = {createNewTree} />
-                <h1> Your Current Streak is: {currentStreak} Days</h1>
             </div>
         </div>
     );
