@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
 import Stats from "../modules/Stats.jsx";
@@ -8,28 +8,26 @@ import CreateTreeButton from "../modules/CreateTreeButton";
 const Dashboard = () => {
     // hardcoded data
     const userName = "Lolade";
-    const [stats, setStreak] = useState(0);
+    const [streak, setStreak] = useState(0);
     const [treeNo, settreeNo] = useState(0);
     const [trees, setTrees] = useState([]);
 
-    //gets called when create new tree is hit to add to screen
-    const createNewTree = (tree) => {
-        setTrees([...trees, tree]);
     }
     //GET streaks
     useEffect (() =>{
         get("/api/streak").then((streakResponse) => {
+            //do i need streakResponse.currentStreak?
             let streak = streakResponse;
             setStreak(streak)
         });
     }, []);
 
-    //POST streaks
-    const updateStreak = () => {
+    //POST streaks - automatic on component load
+    useEffect(() => {
         post("/api/streak", {}).then((updatedStreakResponse) => {
             setStreak(updatedStreakResponse);
         });
-    };
+    }, []);
 
     // GET treeNo
 
@@ -48,18 +46,23 @@ const Dashboard = () => {
     }, []);
 
     let treesList = null;
-    const hasTrees = stories.length !== 0;
+    const hasTrees = trees.length !== 0;
     if (hasTrees) {
         //not sure what TreeCard is doing here
-        treesList = trees.map((treeObj)) => (
+        treesList = trees.map((treeObj) => (
             <TreeCard
-                key = {'TreeCard_${treeObj._id}'}
+                key={`TreeCard_${treeObj._id}`}
+                //tree_name ??
                 name = {treeObj.name}
             />
-        )
+        ));
     }
 
     //POST trees
+    //gets called when create new tree is hit to add to screen
+    const createNewTree = (tree) => {
+            setTrees([...trees, tree]);
+        };
 
     return (
         <div>
@@ -71,6 +74,7 @@ const Dashboard = () => {
                     <p>No trees available.</p>
                 )}
                 <CreateTreeButton onClick = {createNewTree} />
+                <h1> Your Current Streak is: {currentStreak} Days</h1>
             </div>
         </div>
     );
