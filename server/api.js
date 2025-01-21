@@ -43,6 +43,47 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+//GET /api/trees endpoint
+const tree1 = {
+  _id: "tree1",
+  tree_name: "study tree",
+  image: "../treeicon.jpg"
+};
+
+const tree2 = {
+  _id: "tree2",
+  tree_name: "python tree",
+  image: "../treeicon.jpg"
+};
+
+const tree3 = {
+  _id: "tree3",
+  tree_name: "c++ tree",
+  image: "../treeicon.jpg"
+};
+
+const trees = [tree1, tree2, tree3];
+
+app.get("/api/trees", (req, res) => {
+  res.send(trees)
+})
+
+//POST /api/trees endpoint
+
+//GET /api/streaks endpoint
+const streak = {
+  day: 7,
+}
+
+app.get("/api/streak", (req, res) => {
+  res.send(streak);
+});
+
+//POST /api/streaks endpoint
+app.post('/api/streaks', (req, res) => {
+  res.send(streak)
+})
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
