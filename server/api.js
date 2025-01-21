@@ -11,6 +11,8 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Trees = require("./models/trees");
+const Streaks = require("./models/streaks");
 
 // import authentication library
 const auth = require("./auth");
@@ -38,6 +40,22 @@ router.get("/whoami", (req, res) => {
 //   });
 // });
 
+//GET request all trees from the database and send back
+// router.get("/trees", (req, res) => {
+//   Trees.find({}).then((trees) => {
+//     res.send(trees));
+// });
+
+//POST request
+router.post("/trees", (req, res) => {
+  const newTree = new Tree({
+    tree_name: "python",
+    content: req.body.content
+  });
+  newTree.save().then((tree)=> res.send(tree));
+})
+
+
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user)
@@ -49,7 +67,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// POST newTree 
+// POST newTree
 router.post("/trees"), (req, res) => {
   const newTree = req.body;
   trees.push(newTree);
