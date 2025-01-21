@@ -12,11 +12,11 @@ const Dashboard = () => {
     const [treeNo, settreeNo] = useState(0);
     const [trees, setTrees] = useState([]);
 
-    //gets called when create new tree is hit to add to screen 
+    //gets called when create new tree is hit to add to screen
     const createNewTree = (tree) => {
         setTrees([...trees, tree]);
     }
-    //get streaks
+    //GET streaks
     useEffect (() =>{
         get("/api/streak").then((streakResponse) => {
             let streak = streakResponse;
@@ -24,21 +24,21 @@ const Dashboard = () => {
         })
     })
 
-    //post streaks
-    
+    //POST streaks
+    const updateStreak = () => {
+        post("/api/streak", {}).then((updatedStreakResponse) => {
+            setStreak(updatedStreakResponse))
+        }
+    }
+
+    // GET treeNo
 
 
-    // get treeNo
-
-
-    //posttreeNo
+    //POST treeNo
     //needs create new tree button
 
-    //post treeObj to backend
-    //needs create new tree button
 
-
-// promise to get trees
+    // GET trees
     useEffect (() => {
         get("/api/trees").then((treesResponse) => {
             //list trees in reverse order
@@ -50,7 +50,7 @@ const Dashboard = () => {
     let treesList = null;
     const hasTrees = stories.length !== 0;
     if (hasTrees) {
-        //not sure why we passed in treeObj
+        //not sure what TreeCard is doing here
         treesList = trees.map((treeObj)) => (
             <TreeCard
                 key = {'TreeCard_${treeObj._id}'}
@@ -59,10 +59,12 @@ const Dashboard = () => {
         )
     }
 
+    //POST trees 
+
     return (
         <div>
             <Header />
-            <div> 
+            <div>
                 {hasTrees ? (
                     <div>{treesList}</div>
                 ) : (

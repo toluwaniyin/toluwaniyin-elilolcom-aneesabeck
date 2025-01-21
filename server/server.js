@@ -64,7 +64,7 @@ app.use(express.json());
 const tree1 = {
   _id: "tree1",
   tree_name: "study tree",
-  image: "/treeicon.jpg"
+  image: "../treeicon.jpg"
 };
 
 const tree2 = {
@@ -89,7 +89,7 @@ app.get("/api/trees", (req, res) => {
 
 //GET /api/streaks endpoint
 const streak = {
-  day: 7;
+  day: 7,
 }
 
 app.get("/api/streak", (req, res) => {
@@ -98,7 +98,7 @@ app.get("/api/streak", (req, res) => {
 
 //POST /api/streaks endpoint
 app.post('/api/streaks', (req, res) => {
-  const days
+  res.send(streak)
 })
 
 // set up a session, which will persist login data across requests
