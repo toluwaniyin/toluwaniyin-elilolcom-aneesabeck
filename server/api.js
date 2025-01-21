@@ -49,6 +49,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+// POST newTree 
 router.post("/trees"), (req, res) => {
   const newTree = req.body;
   trees.push(newTree);
