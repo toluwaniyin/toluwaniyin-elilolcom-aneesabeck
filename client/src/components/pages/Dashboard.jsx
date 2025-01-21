@@ -75,6 +75,7 @@ const Dashboard = () => {
                     <p>No trees available.</p>
                 )}
             </div>
+            <h1>Your streak is {streak}</h1>
         </div>
     );
 };
