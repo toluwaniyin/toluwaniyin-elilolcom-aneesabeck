@@ -12,7 +12,7 @@ const Trees = ({trees}) => {
                         {tree}
                         {/* <button onClick = {}></button>                        */}
                     </div>)
-                ) 
+                )
                 }
             </div>
         </div>

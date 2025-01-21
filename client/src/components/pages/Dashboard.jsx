@@ -8,8 +8,22 @@ import CreateTreeButton from "../modules/CreateTreeButton";
 const Dashboard = () => {
     // hardcoded data
     const userName = "Lolade";
-    const [stats] = useState({streak: 0, treeNo});
-    const [trees] = useState(["Tree 1", "Tree 2"]);
+    const [stats, setStats] = useState({streak: 0, treeNo});
+    const [trees, setTrees] = useState(["Tree 1", "Tree 2"]);
+
+
+//should only post a tree to the backend when clicks on create new tree
+//then clicks on finish new tree
+
+
+// promise to get trees?
+    useEffect (() => {
+        get("/api/trees").then((treesResponse) => {
+            //list trees in reverse order
+            let reversedTreeObjs = treesResponse.reverse();
+            setTrees(reversedTreeObjs);
+        });
+    }, []);
 
     return (
         <div className ="dashboard-header">
@@ -18,12 +32,15 @@ const Dashboard = () => {
                 <Stats stats = {stats} />
             </div>
             <div className="dashboard-trees">
-                <Trees trees = {trees} /> 
+                <Trees trees = {trees} />
             </div>
             <div className ="dashboard-button">
                 <CreateTreeButton onClick = {createNewTree}/>
             </div>
         </div>
-        
+
     );
 };
+
+
+export default Dashboard;
