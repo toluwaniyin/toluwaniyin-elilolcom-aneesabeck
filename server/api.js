@@ -64,25 +64,42 @@ const tree3 = {
 
 const trees = [tree1, tree2, tree3];
 
-app.get("/api/trees", (req, res) => {
+router.get("/api/trees", (req, res) => {
   res.send(trees)
 })
 
-//POST /api/trees endpoint
+//POST /api/streak endpoint
+let currentStreak = 0;
+let lastUpdatedDate = null;
 
-//GET /api/streaks endpoint
-const streak = {
-  day: 7,
-}
+router.post('/api/streak', (req, res) => {
+    const today = new Date().toDateString();
 
-app.get("/api/streak", (req, res) => {
-  res.send(streak);
+    if (lastUpdatedDate !== today) {
+        //yesterday is one day beefore today
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        if (lastUpdatedDate && new Date(lastUpdatedDate).toDateString() === yesterday.toDateString()) {
+            // Increment streak
+            currentStreak += 1;
+        } else {
+            // Reset streak
+            currentStreak = 1;
+        }
+
+        lastUpdatedDate = today; // Update the last updated date
+    }
+
+    res.send({ success: true, currentStreak });
 });
 
-//POST /api/streaks endpoint
-app.post('/api/streaks', (req, res) => {
-  res.send(streak)
-})
+
+//GET /api/streaks endpoint
+router.get("/api/streak", (req, res) => {
+  res.send({currentStreak});
+});
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

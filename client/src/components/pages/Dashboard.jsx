@@ -21,15 +21,15 @@ const Dashboard = () => {
         get("/api/streak").then((streakResponse) => {
             let streak = streakResponse;
             setStreak(streak)
-        })
-    })
+        });
+    }, []);
 
     //POST streaks
     const updateStreak = () => {
         post("/api/streak", {}).then((updatedStreakResponse) => {
-            setStreak(updatedStreakResponse))
-        }
-    }
+            setStreak(updatedStreakResponse);
+        });
+    };
 
     // GET treeNo
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
         )
     }
 
-    //POST trees 
+    //POST trees
 
     return (
         <div>
