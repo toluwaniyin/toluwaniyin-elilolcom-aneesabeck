@@ -57,7 +57,6 @@ const App = () => {
         <NotFound default />
       </div>
     </UserContext.Provider>
-    </div>
   );
 };
 
