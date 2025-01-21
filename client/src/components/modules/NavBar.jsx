@@ -8,6 +8,9 @@ const NavBar = () => {
         <nav className="NavBar-container">
             <div className="NavBar-title">SkillGrow</div>
             <div className="NavBar-linkContainer u-inlineBlock">
+                <Link to="/" className = "NavBar-link">
+                Home
+                </Link>
                 {props.userId ? (
             <GoogleLogout
                 clientId={GOOGLE_CLIENT_ID}

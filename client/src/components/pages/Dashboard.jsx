@@ -51,24 +51,26 @@ const Dashboard = () => {
     const hasTrees = stories.length !== 0;
     if (hasTrees) {
         //not sure why we passed in treeObj
-        treesList = trees.map((treeObj)) => (
+        treesList = trees.map((treeObj) => (
             <TreeCard
                 key = {'TreeCard_${treeObj._id}'}
                 name = {treeObj.name}
             />
         )
+    )
     }
 
     return (
         <div>
             <Header />
             <div> 
+                <CreateTreeButton onClick = {createNewTree} />
                 {hasTrees ? (
                     <div>{treesList}</div>
                 ) : (
                     <p>No trees available.</p>
                 )}
-                <CreateTreeButton onClick = {createNewTree} />
+                
             </div>
         </div>
     );
