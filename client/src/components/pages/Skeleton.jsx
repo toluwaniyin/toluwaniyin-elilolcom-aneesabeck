@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
-
+import Dashboard from "../pages/Dashboard";
 import "../../utilities.css";
 import "./Skeleton.css";
 import { UserContext } from "../App";
@@ -10,6 +9,7 @@ const Skeleton = () => {
   return (
     <>
       {userId ? (
+        <div>
         <button
           onClick={() => {
             googleLogout();
@@ -18,6 +18,8 @@ const Skeleton = () => {
         >
           Logout
         </button>
+        <Dashboard />
+      </div>
       ) : (
         <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
       )}
