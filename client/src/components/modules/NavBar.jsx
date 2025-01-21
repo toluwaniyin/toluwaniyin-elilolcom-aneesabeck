@@ -1,6 +1,6 @@
 import React from "react";
 import "./NavBar.css";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { GoogleLogin, GoogleLogout } from "@react-oauth/google";
 const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.googleusercontent.com";
 
 const NavBar = () => {

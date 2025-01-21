@@ -9,10 +9,13 @@ const Dashboard = () => {
     // hardcoded data
     const userName = "Lolade";
     const [stats, setStreak] = useState(0);
-    const [treeNo, settreeNo] = useState(0)
+    const [treeNo, settreeNo] = useState(0);
     const [trees, setTrees] = useState([]);
 
-
+    //gets called when create new tree is hit to add to screen 
+    const createNewTree = (tree) => {
+        setTrees([...trees, tree]);
+    }
     //get streaks
     useEffect (() =>{
         get("/api/streak").then((streakResponse) => {
@@ -58,11 +61,15 @@ const Dashboard = () => {
 
     return (
         <div>
-            {hasTrees ? (
-                <div>{treesList}</div>
-            ) : (
-                <p>No trees available.</p>
-            )}
+            <Header />
+            <div> 
+                {hasTrees ? (
+                    <div>{treesList}</div>
+                ) : (
+                    <p>No trees available.</p>
+                )}
+                <CreateTreeButton onClick = {createNewTree} />
+            </div>
         </div>
     );
 };

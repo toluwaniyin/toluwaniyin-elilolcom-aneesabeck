@@ -1,8 +1,9 @@
 import React from "react";
 
 const CreateTreeButton = ({onClick}) => {
-    const createNewTree = () => {
+    const handleCreateTree = (event) => {
         ;
+    }
     }
 
     return(

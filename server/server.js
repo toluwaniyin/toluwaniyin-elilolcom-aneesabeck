@@ -76,7 +76,7 @@ const tree2 = {
 const tree3 = {
   _id: "tree3",
   tree_name: "c++ tree",
-  image: "/treeicon.jpg"
+  image: "../treeicon.jpg"
 };
 
 const trees = [tree1, tree2, tree3];
