@@ -71,7 +71,7 @@ const tree1 = {
 const tree2 = {
   _id: "tree2",
   tree_name: "python tree",
-  image: "/treeicon.jpg"
+  image: "../treeicon.jpg"
 };
 
 const tree3 = {
@@ -83,16 +83,8 @@ const tree3 = {
 const trees = [tree1, tree2, tree3];
 
 app.get("/api/trees", (req, res) => {
-  res.send(trees)
+  res.send(Trees.jsx)
 })
-
-//implement POST/api/trees endpoint
-app.post("/api/trees", (req, res) => {
-  const newTree = req.body;
-  trees.push(newTree);
-  res.send(newTree);
-})
-
 
 // set up a session, which will persist login data across requests
 app.use(

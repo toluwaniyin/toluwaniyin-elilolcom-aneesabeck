@@ -5,11 +5,11 @@ const Trees = ({trees}) => {
         <div className="myTrees">
             <h3>My Trees</h3>
             <div className = "treeGrid">
-                {trees.map((tree, index) => (
-                    <div className = "tree-card"> 
+                {trees.map((tree) => (
+                    <div className = "tree-card">
                         {tree}
                     </div>)
-                ) 
+                )
                 }
             </div>
         </div>

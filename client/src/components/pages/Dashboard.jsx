@@ -12,6 +12,11 @@ const Dashboard = () => {
     const [trees, setTrees] = useState(["Tree 1", "Tree 2"]);
 
 
+//should only post a tree to the backend when clicks on create new tree
+//then clicks on finish new tree
+
+
+// promise to get trees?
     useEffect (() => {
         get("/api/trees").then((treesResponse) => {
             //list trees in reverse order
