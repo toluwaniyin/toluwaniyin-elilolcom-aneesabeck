@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import "./Dashboard.css";
-import Header from "../modules/Header";
-import Stats from "../modules/Stats";
-import Trees from "../modules/Trees";
+import Header from "../modules/Header.jsx";
+import Stats from "../modules/Stats.jsx";
+import Trees from "../modules/Trees.jsx";
 import CreateTreeButton from "../modules/CreateTreeButton";
 
 const Dashboard = () => {

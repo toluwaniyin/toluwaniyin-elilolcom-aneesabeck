@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Outlet } from "react-router-dom";
-
+import Dashboard from "./pages/Dashboard.jsx";
 import jwt_decode from "jwt-decode";
 
 import "../utilities.css";
@@ -8,6 +8,7 @@ import "../utilities.css";
 import { socket } from "../client-socket";
 
 import { get, post } from "../utilities";
+import NavBar from "./modules/NavBar.jsx";
 
 export const UserContext = createContext(null);
 
@@ -48,9 +49,15 @@ const App = () => {
   };
 
   return (
-    <UserContext.Provider value={authContextValue}>
-      <Outlet />
-    </UserContext.Provider>
+    // <UserContext.Provider value={authContextValue}>
+    //   <Outlet />
+    // </UserContext.Provider>
+    <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+    <div className ="App-container">
+        <Dashboard path = "/" userId={userId} />
+        <NotFound default />
+      
+    </div>
   );
 };
 
