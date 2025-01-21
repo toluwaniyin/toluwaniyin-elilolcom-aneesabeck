@@ -56,6 +56,7 @@ const Dashboard = () => {
                 name = {treeObj.name}
             />
         )
+    )
     }
 
     //POST trees
