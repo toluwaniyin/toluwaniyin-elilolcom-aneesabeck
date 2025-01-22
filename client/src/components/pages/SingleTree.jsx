@@ -1,15 +1,15 @@
-import {useParams} from "react-router-dom"
-import {ProgressBar} from "../modules/ProgressBar.jsx";
+import { useParams } from "react-router-dom";
+import ProgressBar from "../modules/ProgressBar.jsx";
 
 const SingleTreeDetail = (tree) => {
-    const { treeName } = useParams();
+  const { treeName } = useParams();
 
-    return (
-        <div>
-            <h1>Tree: {treeName} </h1>
+  return (
+    <div>
+      <h1>Tree: {ProgressBar} </h1>
+      <h1>Tree: {treeName} </h1>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default SingleTreeDetail
+export default SingleTreeDetail;

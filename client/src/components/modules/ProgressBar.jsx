@@ -38,7 +38,7 @@ const ProgressBar = () => {
       <button className="progress-button" onClick={handleButtonClick}>
         Progress
       </button>
-      <button className="progress-button" onClick={handleButtonClick}>
+      <button className="progress-button" onClick={handleButtonReset}>
         Reset
       </button>
     </div>
