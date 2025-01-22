@@ -5,7 +5,8 @@ import Stats from "../modules/Stats.jsx";
 import TreeCard from "../modules/TreeCard.jsx";
 import {HandleCreateTree} from "../modules/CreateTreeButton";
 
-import { get, post } from "../../utilities";
+import { get, post, del } from "../../utilities";
+
 
 const Dashboard = () => {
   // hardcoded data
@@ -43,6 +44,14 @@ const Dashboard = () => {
     });
   }, []);
 
+  // DELETE trees
+  const deleteTree = (treeId) => {
+    del(`/api/tree/${treeId}`).then(() => {
+      // Update the local state after successful deletion
+      setTrees(trees.filter((tree) => tree._id !== treeId));
+    });
+  };
+  
   let treesList = null;
   const hasTrees = trees.length !== 0;
   if (hasTrees) {
@@ -52,6 +61,7 @@ const Dashboard = () => {
         key={`TreeCard_${treeObj._id}`}
         name={treeObj.name}
         treeImgSrc={treeObj.image}
+        onDelete={() => deleteTree(treeObj._id)}
       />
     ));
   }
@@ -61,6 +71,7 @@ const Dashboard = () => {
   const createNewTree = (tree) => {
     setTrees([...trees, tree]);
   };
+
 
   return (
     <div className = "dashboard-container">

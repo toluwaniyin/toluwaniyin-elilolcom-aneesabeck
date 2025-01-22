@@ -57,6 +57,27 @@ router.post("/tree", (req, res) => {
   newTree.save().then((tree) => res.send(tree));
 });
 
+//DELETE request
+router.delete("/tree/:id", (req, res) => {
+  const treeId = req.params.id;
+
+  Tree.findByIdAndDelete(treeId)
+    .then((deletedTree) => {
+      if (deletedTree) {
+        console.log(`Tree with ID ${treeId} deleted successfully.`);
+        res.status(200).send({ message: "Tree deleted successfully." });
+      } else {
+        console.log(`Tree with ID ${treeId} not found.`);
+        res.status(404).send({ error: "Tree not found." });
+      }
+    })
+    .catch((err) => {
+      console.error(`Error deleting tree with ID ${treeId}:`, err);
+      res.status(500).send({ error: "Failed to delete tree." });
+    });
+});
+
+
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user)

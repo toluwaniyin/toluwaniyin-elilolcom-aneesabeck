@@ -11,10 +11,16 @@ const TreeCard = (props) => {
   };
 
   return (
-    <div className="tree-card" onClick={handleTreeCard}>
-      <img src={props.treeImgSrc} alt={props.name} />
+    <div className="tree-card-container">
+      <div className="tree-card" onClick={handleTreeCard}>
+      <img src={props.treeImgSrc} />
       <p>{props.name}</p>
     </div>
+    <button className="delete-button" onClick={props.onDelete}>
+      Delete Tree
+    </button>
+    </div>
+    
   );
 };
 
