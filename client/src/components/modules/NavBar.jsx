@@ -4,7 +4,6 @@ import "./NavBar.css";
 import { GoogleLogin,  googleLogout} from "@react-oauth/google";
 const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.googleusercontent.com";
 import { Link } from "react-router-dom"
-
 const NavBar = () => {
     const { userId, handleLogin, handleLogout } = useContext(UserContext);
     return(

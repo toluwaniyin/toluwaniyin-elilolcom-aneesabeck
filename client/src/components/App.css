@@ -1,3 +1,7 @@
 .NavBar-color {
     color: #3F9B0B;
 }
+.NavBar-container {
+    padding: 8px 16px;
+    color: #3F9B0B;
+}

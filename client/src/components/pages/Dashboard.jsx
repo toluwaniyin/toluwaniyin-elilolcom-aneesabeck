@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
-import Stats from "../modules/Stats.jsx";
 import TreeCard from "../modules/TreeCard.jsx";
 import {HandleCreateTree} from "../modules/CreateTreeButton";
 
@@ -10,7 +9,7 @@ import { get, post, del } from "../../utilities";
 
 const Dashboard = () => {
   // hardcoded data
-  const userName = "Lolade";
+  const [userName, setUserName] = useState("")
   const [streak, setStreak] = useState(0);
   const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
@@ -18,6 +17,7 @@ const Dashboard = () => {
   //GET streaks
   useEffect(() => {
     get("/api/user").then((userResponse) => {
+        // add a set when login 
       let streak = userResponse.streak;
       setStreak(streak);
     });
@@ -76,7 +76,7 @@ const Dashboard = () => {
   return (
     <div className = "dashboard-container">
       <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
-      <Header />
+      <Header username = {userName}/>
       <div className = "trees-section">
         <h1> My Trees </h1>
         {hasTrees ? <div className = "trees-grid">{treesList}</div> : <p>No trees available.</p>}
