@@ -41,8 +41,8 @@ router.get("/user", (req, res) => {
 });
 
 //GET request all trees from the database and send back
-router.get("/trees", (req, res) => {
-  Trees.find({}).then((trees) => {
+router.get("/tree", (req, res) => {
+  Tree.find({}).then((trees) => {
     res.send(trees);
   });
 });
@@ -50,9 +50,10 @@ router.get("/trees", (req, res) => {
 //POST request
 router.post("/tree", (req, res) => {
   const newTree = new Tree({
-    tree_name: "python",
-    content: req.body.content,
+    name: req.body.name,
+    image: "/treeIcon.jpg"
   });
+  console.log("added Tree")
   newTree.save().then((tree) => res.send(tree));
 });
 
