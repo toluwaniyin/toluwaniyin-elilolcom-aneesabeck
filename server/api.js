@@ -11,8 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const Trees = require("./models/trees");
-const Streaks = require("./models/streaks");
+const Tree = require("./models/tree");
 
 // import authentication library
 const auth = require("./auth");
@@ -34,27 +33,28 @@ router.get("/whoami", (req, res) => {
   res.send(req.user);
 });
 
-// router.get("/user", (req, res) => {
-//   User.findById(req.query.userid).then((user) => {
-//     res.send(user);
-//   });
-// });
+//GET request for streaks-returning whole user back
+router.get("/user", (req, res) => {
+  User.findById(req.query.userid).then((user) => {
+    res.send(user);
+  });
+});
 
 //GET request all trees from the database and send back
-// router.get("/trees", (req, res) => {
-//   Trees.find({}).then((trees) => {
-//     res.send(trees));
-// });
+router.get("/trees", (req, res) => {
+  Trees.find({}).then((trees) => {
+    res.send(trees);
+  });
+});
 
 //POST request
-router.post("/trees", (req, res) => {
+router.post("/tree", (req, res) => {
   const newTree = new Tree({
     tree_name: "python",
-    content: req.body.content
+    content: req.body.content,
   });
-  newTree.save().then((tree)=> res.send(tree));
-})
-
+  newTree.save().then((tree) => res.send(tree));
+});
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
@@ -67,51 +67,15 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// POST newTree
-router.post("/trees"), (req, res) => {
-  const newTree = req.body;
-  trees.push(newTree);
-  res.send(newTree);
-}
 
-//GET /api/trees endpoint
-const tree1 = {
-  _id: "tree1",
-  tree_name: "study tree",
-  image: "../treeicon.jpg",
-};
-
-const tree2 = {
-  _id: "tree2",
-  tree_name: "python tree",
-  image: "../treeicon.jpg",
-};
-
-const tree3 = {
-  _id: "tree3",
-  tree_name: "c++ tree",
-  image: "../treeicon.jpg",
-};
-
-const trees = [tree1, tree2, tree3];
-
-router.get("/api/trees", (req, res) => {
-  res.send(trees);
-});
 
 //POST /api/trees endpoint
 //TO DO
 
-//GET /api/streaks endpoint
-router.get("/api/streak", (req, res) => {
-  res.send(currentStreak);
-});
-
 //POST /api/streak endpoint
-let currentStreak = 0;
-let lastUpdatedDate = null;
 
-router.post("/api/streak", (req, res) => {
+//POST REQUEST FOR STREAK
+router.post("/streak", (req, res) => {
   const today = new Date().toDateString();
 
   if (lastUpdatedDate !== today) {
@@ -126,8 +90,7 @@ router.post("/api/streak", (req, res) => {
       // Reset streak
       currentStreak = 1;
     }
-
-    lastUpdatedDate = today; // Update the last updated date
+    User.findByIdAndUpdate(req.user._id, { streak: currentStreak, lastUpdatedDate: today });
   }
 
   res.send(currentStreak);

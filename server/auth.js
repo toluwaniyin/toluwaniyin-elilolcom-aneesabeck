@@ -26,6 +26,8 @@ function getOrCreateUser(user) {
     const newUser = new User({
       name: user.name,
       googleid: user.sub,
+      streak: 0,
+      lastUpdatedDate: null,
     });
 
     return newUser.save();

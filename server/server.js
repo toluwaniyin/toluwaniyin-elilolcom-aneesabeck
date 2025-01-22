@@ -80,7 +80,6 @@ app.use(
 app.use(auth.populateCurrentUser);
 
 
-app.use("/api", router);
 // connect user-defined routes
 app.use("/api", api);
 

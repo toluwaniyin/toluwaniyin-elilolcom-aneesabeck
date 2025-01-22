@@ -5,9 +5,10 @@
 
 const mongoose = require("mongoose");
 
-const StreaksSchema = new mongoose.Schema({
-  value: streaks,
+const TreeSchema = new mongoose.Schema({
+  name: String,
+  image: Image,
 });
 
 // compile model from schema
-module.exports = mongoose.model("streaks", StreaksSchema);
+module.exports = mongoose.model("tree", TreeSchema);
