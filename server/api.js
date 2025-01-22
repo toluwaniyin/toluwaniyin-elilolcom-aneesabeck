@@ -59,8 +59,10 @@ router.post("/tree", (req, res) => {
 
 //DELETE request
 router.delete("/tree/:id", (req, res) => {
+  
+  console.log("DELETE request received")
   const treeId = req.params.id;
-
+ 
   Tree.findByIdAndDelete(treeId)
     .then((deletedTree) => {
       if (deletedTree) {

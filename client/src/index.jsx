@@ -13,7 +13,7 @@ import {
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Dashboard from "./components/pages/Dashboard";
-import SingleTree from "./components/modules/SingleTree";
+import SingleTree from "./components/pages/SingleTree";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.googleusercontent.com";
