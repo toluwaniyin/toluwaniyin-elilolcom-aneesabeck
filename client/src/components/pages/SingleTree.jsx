@@ -1,4 +1,5 @@
 import {useParams} from "react-router-dom"
+import {ProgressBar} from "../modules/ProgressBar.jsx";
 
 const SingleTreeDetail = (tree) => {
     const { treeName } = useParams();
@@ -6,7 +7,7 @@ const SingleTreeDetail = (tree) => {
     return (
         <div>
             <h1>Tree: {treeName} </h1>
-        
+
         </div>
     )
 }
