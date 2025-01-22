@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
 import Stats from "../modules/Stats.jsx";
-import Trees from "../modules/Trees.jsx";
+import TreeCard from "../modules/TreeCard.jsx";
 import CreateTreeButton from "../modules/CreateTreeButton";
 
 import { get, post } from "../../utilities";
@@ -50,8 +50,8 @@ const Dashboard = () => {
     treesList = trees.map((treeObj) => (
       <TreeCard
         key={`TreeCard_${treeObj._id}`}
-        //tree_name ??
         name={treeObj.name}
+        treeImgSrc={treeObj.image}
       />
     ));
   }
