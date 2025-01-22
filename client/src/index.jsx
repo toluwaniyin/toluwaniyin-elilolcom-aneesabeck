@@ -13,6 +13,7 @@ import {
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Dashboard from "./components/pages/Dashboard";
+import SingleTree from "./components/modules/SingleTree";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.googleusercontent.com";
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Dashboard />}/>
-      
+      <Route path="/tree/:treeName" element ={<SingleTree />} />
     </Route>
   )
 )

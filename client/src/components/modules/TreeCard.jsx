@@ -1,21 +1,21 @@
-import React, {useContext} from "react";
-import "./TreeCard.css"
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import "./TreeCard.css";
+
 const TreeCard = (props) => {
+  const navigate = useNavigate();
+
+  const handleTreeCard = () => {
+    navigate(`/tree/${props.name}`); 
+  };
+
   return (
-<<<<<<< HEAD
-      <div className="tree-card">
-        <img src= {props.treeImgSrc} />
-        <p>{props.name}</p>
-      </div>
-    );
-  }
-=======
-    <div className="Card-container">
-      <img src={props.treeImgSrc} />
+    <div className="tree-card" onClick={handleTreeCard}>
+      <img src={props.treeImgSrc} alt={props.name} />
       <p>{props.name}</p>
     </div>
   );
 };
->>>>>>> fd1722c9ae1bfe8d5eebc7259acbcd39c5482757
 
 export default TreeCard;
