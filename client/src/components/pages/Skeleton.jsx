@@ -18,7 +18,6 @@ const Skeleton = () => {
         >
           Logout
         </button>
-        <Dashboard />
       </div>
       ) : (
         <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />

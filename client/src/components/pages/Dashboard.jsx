@@ -5,6 +5,8 @@ import Stats from "../modules/Stats.jsx";
 import Trees from "../modules/Trees.jsx";
 import CreateTreeButton from "../modules/CreateTreeButton";
 
+import { get, post } from "../../utilities";
+
 const Dashboard = () => {
   // hardcoded data
   const userName = "Lolade";
