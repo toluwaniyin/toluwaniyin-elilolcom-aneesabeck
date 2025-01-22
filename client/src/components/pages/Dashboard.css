@@ -3,6 +3,14 @@
     color: #3F9B0B;
 }
 
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
 .dashboard-trees {
 
 }
@@ -14,15 +22,47 @@
 .dashboard-button {
 
 }
+.stats-section, .trees-section {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .stats-section {
+    flex: 1;
+    background-color: #836539;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .trees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
+  .tree-card {
+    background-color: #dcedc8;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tree-card:hover {
+    background-color: #c5e1a5;
+  }
 
-.tree-card {
+  .create-tree-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-}
-
-.createTreeButton {
-
-}
-
-.myTrees{
-    
-}

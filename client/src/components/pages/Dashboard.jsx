@@ -63,11 +63,18 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className = "dashboard-container">
       <HandleCreateTree createTree={createNewTree} />
       <Header />
-      <div>{hasTrees ? <div>{treesList}</div> : <p>No trees available.</p>}</div>
-      <h1>Your streak is {streak}</h1>
+      <div className = "trees-section">
+        <h1> My Trees </h1>
+        {hasTrees ? <div className = "trees-grid">{treesList}</div> : <p>No trees available.</p>}
+        </div>
+        <div className = "stats-section"> 
+        <h1>My Stats</h1>
+        <h3>Your streak is {streak}</h3>
+        </div>
+      
     </div>
   );
 };

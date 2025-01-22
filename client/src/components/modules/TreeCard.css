@@ -1,0 +1,11 @@
+.tree-card {
+    background-color: #dcedc8;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .tree-card img{
+    max-height: 150px;
+  }
