@@ -36,9 +36,11 @@ router.get("/whoami", (req, res) => {
 //GET request for streaks-returning whole user back
 router.get("/user", (req, res) => {
   User.findById(req.query.userid).then((user) => {
+    console.log("User found")
     res.send(user);
   });
 });
+
 
 //GET request all trees from the database and send back
 router.get("/tree", (req, res) => {

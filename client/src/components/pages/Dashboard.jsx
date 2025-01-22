@@ -5,30 +5,49 @@ import TreeCard from "../modules/TreeCard.jsx";
 import {HandleCreateTree} from "../modules/CreateTreeButton";
 
 import { get, post, del } from "../../utilities";
+import { useParams } from "react-router-dom";
 
 
 const Dashboard = () => {
   // hardcoded data
-  const [userName, setUserName] = useState("")
+  const [user, setUser] = useState(null) //**** */
   const [streak, setStreak] = useState(0);
   const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
-
+ //added in 
+  const { name } = useParams();
   //GET streaks
   useEffect(() => {
-    get("/api/user").then((userResponse) => {
-        // add a set when login 
-      let streak = userResponse.streak;
-      setStreak(streak);
+    console.log("useEffect is running!");
+    if (!name) {
+        console.error("Name parameter is missing in the URL.");
+        return; // Skip the request if the name is undefined
+      }
+
+    get("/api/user", {params :{userid: name}}).then((userResponse) => { 
+
+      console.log(userResponse)
+      if (userResponse) {
+        setUser(userResponse)
+        console.log("User Name:", userResponse.name)
+
+        // let streak = userResponse.streak;
+        // setStreak(streak);
+        
+        // setUserName(userResponse.name);
+      }
+      
+    }).catch((err) => {
+        console.error("Error fetching user:", err);
     });
   }, []);
 
   //POST streaks - automatic on component load
-  useEffect(() => {
-    post("/api/streak", {}).then((updatedStreakResponse) => {
-      setStreak(updatedStreakResponse);
-    });
-  }, []);
+//   useEffect(() => {
+//     post("/api/streak", {}).then((updatedStreakResponse) => {
+//       setStreak(updatedStreakResponse);
+//     });
+//   }, []);
 
   // GET treeNo
 
@@ -75,8 +94,11 @@ const Dashboard = () => {
 
   return (
     <div className = "dashboard-container">
-      <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
-      <Header username = {userName}/>
+        <div className="create-tree-button">
+        <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
+        </div>
+      
+      {user && <Header username = {user.name}/>}
       <div className = "trees-section">
         <h1> My Trees </h1>
         {hasTrees ? <div className = "trees-grid">{treesList}</div> : <p>No trees available.</p>}
