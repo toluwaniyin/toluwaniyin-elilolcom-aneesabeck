@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import "./TreeCard.css";
 
 const TreeCard = (props) => {
   return (

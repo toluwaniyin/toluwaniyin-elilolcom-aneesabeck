@@ -8,13 +8,14 @@ const NavBar = () => {
     const { userId, handleLogin, handleLogout } = useContext(UserContext);
     return(
         <nav className="NavBar-container">
-            <div className="NavBar-title">SkillGrow</div>
+            <div className="NavBar-title u-inlineBlock">SkillGrow</div>
             <div className="NavBar-linkContainer u-inlineBlock">
-                <Link to="/" className = "NavBar-link">
+                <Link to="/" className = "NavBar-link u-inlineBlock">
                 Dashboard
                 </Link>
+                
                 {userId ? (
-                <div>
+                <div className="NavBar-link u-inlineBlock">
                     <button
                     onClick={() => {
                         googleLogout();
@@ -23,9 +24,9 @@ const NavBar = () => {
                     >
                     Logout
                     </button>
-                </div>
+                </div >
                 ) : (
-                    <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
+                    <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} containerProps = {{"className":"NavBar-link NavBar-login u-inlineBlock"}}/>
                 )}
              </div>
         </nav>

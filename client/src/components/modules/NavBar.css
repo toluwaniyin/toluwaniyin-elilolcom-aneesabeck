@@ -1,5 +1,5 @@
 .NavBar-title {
-    color: #ffffff;
+    color: #000;
     font-size: 40px;
     font-family: "Lobster Two";
 }
@@ -16,7 +16,7 @@
   
   .NavBar-link,
   .NavBar-link:visited {
-    color: var(--white);
+    color: #3F9B0B;
     opacity: 0.6;
     text-decoration: none;
   }

@@ -3,7 +3,7 @@ import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
 import Stats from "../modules/Stats.jsx";
 import TreeCard from "../modules/TreeCard.jsx";
-import CreateTreeButton from "../modules/CreateTreeButton";
+import {HandleCreateTree} from "../modules/CreateTreeButton";
 
 import { get, post } from "../../utilities";
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
 
   // GET trees
   useEffect(() => {
-    get("/api/trees").then((treesResponse) => {
+    get("/api/tree").then((treesResponse) => {
       //list trees in reverse order
       let reversedTreeObjs = treesResponse.reverse();
       setTrees(reversedTreeObjs);
@@ -64,7 +64,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <handleCreateTree createTree={createNewTree} />
+      <HandleCreateTree createTree={createNewTree} />
       <Header />
       <div>{hasTrees ? <div>{treesList}</div> : <p>No trees available.</p>}</div>
       <h1>Your streak is {streak}</h1>
