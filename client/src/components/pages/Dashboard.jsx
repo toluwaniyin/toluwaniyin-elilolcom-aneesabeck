@@ -64,7 +64,7 @@ const Dashboard = () => {
 
   return (
     <div className = "dashboard-container">
-      <HandleCreateTree createTree={createNewTree} />
+      <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
       <Header />
       <div className = "trees-section">
         <h1> My Trees </h1>

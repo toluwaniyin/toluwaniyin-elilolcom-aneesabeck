@@ -3,6 +3,10 @@ import { post } from "../../utilities";
 
 export const HandleCreateTree = (props) => {
     const addTree = (treeName) => {
+        if (props.existingTrees.includes(treeName)) {
+            alert(`Tree "${treeName}" already exists.`);
+            return; // Exit early if treeName exists
+          }
         const body = { name: treeName };  // fill in body with value
         // // props.createNewTree({_id: })
         post("/api/tree", body).then((tree)=>props.createTree(tree))
