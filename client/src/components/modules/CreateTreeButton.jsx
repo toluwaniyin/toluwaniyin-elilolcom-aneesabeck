@@ -1,13 +1,16 @@
-import React, { useState} from "react";
+import React, { useState, useContext} from "react";
 import { post } from "../../utilities";
+import { UserContext } from "../App.jsx";
+ 
 
 export const HandleCreateTree = (props) => {
+    const userContext = useContext(UserContext)
     const addTree = (treeName) => {
         if (props.existingTrees.includes(treeName)) {
             alert(`Tree "${treeName}" already exists.`);
             return; // Exit early if treeName exists
           }
-        const body = { name: treeName };  // fill in body with value
+        const body = { name: treeName, userid: userContext.userId };  // fill in body with value
         // // props.createNewTree({_id: })
         post("/api/tree", body).then((tree)=>props.createTree(tree))
     }

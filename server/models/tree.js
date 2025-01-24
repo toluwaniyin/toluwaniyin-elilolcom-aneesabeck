@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const TreeSchema = new mongoose.Schema({
   name: String,
   image: String,
+  userid: String
 });
 
 // compile model from schema

@@ -35,25 +35,35 @@ router.get("/whoami", (req, res) => {
 
 //GET request for streaks-returning whole user back
 router.get("/user", (req, res) => {
-  User.findById(req.query.userid).then((user) => {
+  console.log(req.query.userId)
+  User.findById(req.query.userId).then((user) => {
     console.log("User found")
     res.send(user);
+  }).catch((err)=>{
+    console.log("MongoDB couldn't find user")
   });
 });
 
 
 //GET request all trees from the database and send back
 router.get("/tree", (req, res) => {
-  Tree.find({}).then((trees) => {
-    res.send(trees);
-  });
+  if (req.user) {
+    Tree.find({userid: req.user._id}).then((trees) => res.send(trees));
+  }
 });
+//   }
+//   console.log("req", req.query.userId)
+//   Tree.find({userid: req.query.userId}).then((trees) => {
+//     res.send(trees);
+//   });
+// });
 
 //POST request
 router.post("/tree", (req, res) => {
   const newTree = new Tree({
     name: req.body.name,
-    image: "/treeIcon.jpg"
+    image: "/treeIcon.jpg",
+    userid: req.body.userid
   });
   console.log("added Tree")
   newTree.save().then((tree) => res.send(tree));

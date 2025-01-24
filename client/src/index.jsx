@@ -23,8 +23,8 @@ const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.goo
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
-      {/* <Route path="/" element={<LoginPage />} /> */}
-      <Route path="/" element={<Dashboard />}/>
+      <Route path="/" element={<Dashboard />} />
+      {/* <Route path="/dashboard/:id" element={<Dashboard />}/> */}
       <Route path="/tree/:treeName" element ={<SingleTree />} />
     </Route>
   )
