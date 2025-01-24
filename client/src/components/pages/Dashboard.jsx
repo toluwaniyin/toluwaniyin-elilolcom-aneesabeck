@@ -5,13 +5,14 @@ import TreeCard from "../modules/TreeCard.jsx";
 import {HandleCreateTree} from "../modules/CreateTreeButton";
 import { UserContext } from "../App.jsx";
 import { get, post, del } from "../../utilities";
-import { useParams } from "react-router-dom";
-
+import NavBar from "../modules/NavBar.jsx";
 
 const Dashboard = () => {
-const userContext = useContext(UserContext)
+
+  const userContext = useContext(UserContext);
   // hardcoded data
-  const [user, setUser] = useState(undefined) //**** */
+  const [user, setUser] = useState(undefined); //**** */
+
   const [streak, setStreak] = useState(0);
   const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
@@ -25,21 +26,23 @@ const userContext = useContext(UserContext)
     //     return; // Skip the request if the name is undefined
     //   }
     console.log("userid:", userContext.userId);
-    get("/api/user",{userId: userContext.userId}).then((userResponse) => { 
+    if (userContext.userId){
+        get("/api/user",{userId: userContext.userId}).then((userResponse) => { 
 
-      if (userResponse) {
-        setUser(userResponse)
-        // console.log("User Name:", userResponse.name)
-
-        // let streak = userResponse.streak;
-        // setStreak(streak);
-        
-        // setUserName(userResponse.name);
-      }
+            if (userResponse) {
+              setUser(userResponse)
+              // console.log("User Name:", userResponse.name)
       
-    }).catch((err) => {
-        console.error("Error fetching user:", err);
-    });
+              // let streak = userResponse.streak;
+              // setStreak(streak);
+              
+              // setUserName(userResponse.name);
+            }
+            
+          }).catch((err) => {
+              console.error("Error fetching user:", err);
+          });
+    }
   }, [userContext.userId]);
 
   //POST streaks - automatic on component load
@@ -60,10 +63,10 @@ const userContext = useContext(UserContext)
         console.log("Fetching trees for user:", userContext.userId);
 
     console.log("user", userContext.userId)
-   get(`/api/tree?userid=${userContext.userId}`).then((treesResponse) => {
-      //list trees in reverse order
-      let reversedTreeObjs = treesResponse.reverse();
-      setTrees(reversedTreeObjs);
+        get(`/api/tree?userid=${userContext.userId}`).then((treesResponse) => {
+            //list trees in reverse order
+        let reversedTreeObjs = treesResponse.reverse();
+        setTrees(reversedTreeObjs);
     });
 }
   }, [userContext.userId]);
@@ -101,7 +104,10 @@ const userContext = useContext(UserContext)
 
 
   return (
+    <div>
+      <NavBar />
     <div className = "dashboard-container">
+      
         <div className="create-tree-button">
         <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
         </div>
@@ -117,6 +123,8 @@ const userContext = useContext(UserContext)
         </div>
       
     </div>
+    </div>
+    
   );
 };
 
