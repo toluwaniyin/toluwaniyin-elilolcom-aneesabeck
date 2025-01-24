@@ -12,6 +12,8 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Tree = require("./models/tree");
+//const axios = require("axios");
+//const OPENAI_API_KEY = "your-api-key-here";
 
 // import authentication library
 const auth = require("./auth");
@@ -57,12 +59,35 @@ router.get("/tree", (req, res) => {
 });
 
 //POST request for new tree
-router.post("/tree", (req, res) => {
+router.post("/tree", async (req, res) => {
   const newTree = new Tree({
     name: req.body.name,
     image: "/treeIcon.jpg",
     progress: 0,
   });
+
+  // opnai
+  // const response = await axios.post(
+  //   "https://api.openai.com/v1/chat/completions",
+  //   {
+  //     model: "gpt-4", // Specify the model (e.g., gpt-4)
+  //     messages: [
+  //       { role: "system", content: "You are a helpful assistant." },
+  //       { role: "user", content: `I'm looking to learn about ${userInput}` },
+  //     ],
+  //     max_tokens: 60, // Limit the length of the response
+  //   },
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${OPENAI_API_KEY}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+
+  //parse response here
+
+
   console.log("added Tree");
   newTree.save().then((tree) => res.send(tree));
 });
@@ -74,19 +99,24 @@ router.get("/treeprogress", (req, res) => {
   });
 });
 
-//PUT REQUEST to update progress of an existing tree
+// //POST REQUEST to update progress of an existing tree
 router.post("/treeprogress", (req, res) => {
-  const treeId = req.body.treeId;
-  const newProgress = req.body.progress;
+  const { treeId, progress } = req.body;
+
+  if (!treeId || progress === undefined) {
+    return res.status(400).send("treeId and progress are required");
+  }
+
   Tree.findByIdAndUpdate(
-    treeId, // Find tree by ID from URL parameter
-    newProgress // Update the progress field
+    treeId, // Find the tree by its ID
+    { progress: progress }, // Update the progress field
+    { new: true } // Return the updated document
   )
     .then((updatedTree) => {
       if (!updatedTree) {
         return res.status(404).send("Tree not found");
       }
-      res.send(updatedTree);
+      res.send(updatedTree); // Return the updated tree
     })
     .catch((err) => {
       console.error("Error updating progress:", err);
@@ -125,6 +155,7 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
 
 //POST /api/trees endpoint
 //TO DO

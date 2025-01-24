@@ -7,10 +7,16 @@ const ProgressBar = ({ treeId }) => {
 
   // GET Progress
   useEffect(() => {
-    get("/api/treeprogress").then((TreeResponse) => {
-      let new_progress = TreeResponse.progress; // Default to 0 if progress is undefined
-      setProgress(new_progress);
-    });
+    get(`/api/treeprogress`, { treeId })
+      .then((treeResponse) => {
+        console.log(treeResponse); // Ensure this logs the entire tree object
+        const progress = treeResponse.progress || 0; // Default to 0 if progress is undefined
+        console.log(progress);
+        setProgress(progress);
+      })
+      .catch((err) => {
+        console.error("Error fetching tree progress:", err);
+      });
   }, [treeId]);
 
   const handleButtonClick = () => {
@@ -45,6 +51,29 @@ const ProgressBar = ({ treeId }) => {
       return "#2ecc71"; // Green for high progress
     }
   };
+
+  // const getTree = () => {
+  //   if (progress==10) {
+  //       return
+  //   } else if (progress ==20) {
+  //       return
+  //   } else if (progress ==30) {
+  //       return
+  //   } else if (progress ==40) {
+  //       return
+  //   } else if (progress ==50) {
+  //       return
+  //   } else if (progress ==60) {
+  //       return
+  //   } else if (progress ==70) {
+  //       return
+  //   } else if (progress ==80) {
+  //       return
+  //   } else if (progress ==90) {
+  //       return
+  //   } else {
+  //       return "#2ecc71";
+  // }
 
   return (
     <div className="progress-container">

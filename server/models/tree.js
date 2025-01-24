@@ -9,6 +9,7 @@ const TreeSchema = new mongoose.Schema({
   name: String,
   image: String,
   progress: Number,
+  //store tasks + questions - have to parse
 });
 
 // compile model from schema
