@@ -95,7 +95,7 @@ const ProgressBar = ({ treeId }) => {
         }}
       >
         <img
-          src="/grow.jpg" // Replace with the path to your tree image
+          src="/grow2.png" // Replace with the path to your tree image
           alt="Growing Tree"
           className="tree-image"
         />
