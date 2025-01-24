@@ -10,6 +10,7 @@ const TreeSchema = new mongoose.Schema({
   image: String,
   userid: String,
   progress: Number,
+  learningTopic: String,
   //store tasks + questions - have to parse
 });
 

@@ -75,6 +75,7 @@ router.post("/tree", async (req, res) => {
     image: "/treeIcon.jpg",
     userid: req.body.userid,
     progress: 0,
+    learningTopic: req.body.learningTopic,
   });
 
   // opnai
