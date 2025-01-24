@@ -22,8 +22,9 @@ const SingleTreeDetail = (props) => {
         <div className="single-tree-container">
         <div className="single-tree-content">
             <div className="single-tree-card">
-            <h2>Progress:</h2>
+            <h2>Progress: </h2>
             <ProgressBar treeId={treeId} />
+            
             </div>
             <h2>Tree Name: {treeName}</h2>
         </div>

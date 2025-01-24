@@ -15,8 +15,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <h1>Login Page</h1>
-      <p>Welcome to SkillGrow! Please log in with your Google account.</p>
+      <h1>Welcome to SkillGrow! Please log in with your Google account.</h1>
       <GoogleLogin
         onSuccess={handleLoginSuccess}
         onError={() => {

@@ -100,12 +100,15 @@ const ProgressBar = ({ treeId }) => {
           className="tree-image"
         />
       </div>
+      
+      <div className="button-container">
       <button className="progress-button" onClick={handleButtonClick}>
         Grow
       </button>
       <button className="progress-button" onClick={handleButtonReset}>
         Reset
       </button>
+    </div>
     </div>
   );
 };

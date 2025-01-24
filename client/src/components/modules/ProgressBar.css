@@ -4,7 +4,7 @@
   align-items: center; /* Center items vertically */
   justify-content: center; /* Center items horizontally */
   width: 100%; /* Make the container take the full width */
-  margin-top: 200px;
+  margin-top: 10px;
 }
 
 .progress-bar {
@@ -59,4 +59,10 @@
   height: auto; /* Maintain aspect ratio */
   max-width: 500px; /* Set a maximum width */
   border-radius: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  
 }

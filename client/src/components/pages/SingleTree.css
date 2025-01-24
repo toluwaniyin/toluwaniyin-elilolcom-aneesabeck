@@ -4,7 +4,7 @@
     align-items: center;
     padding: 20px;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 100%;
   }
   
   .single-tree-header {
@@ -63,3 +63,4 @@
   .single-tree-button:hover {
     background-color: #45a049;
   }
+  
