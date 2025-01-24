@@ -87,6 +87,19 @@ const ProgressBar = ({ treeId }) => {
         ></div>
       </div>
       <div className="progress-label">{progress}</div>
+      <div
+        className="tree-container"
+        style={{
+          transform: `scale(${0.5 + progress / 100})`, // Scale from 0.5 to 1.5 as progress grows
+          transition: "transform 0.5s ease-in-out", // Smooth scaling transition
+        }}
+      >
+        <img
+          src="/grow.jpg" // Replace with the path to your tree image
+          alt="Growing Tree"
+          className="tree-image"
+        />
+      </div>
       <button className="progress-button" onClick={handleButtonClick}>
         Grow
       </button>
