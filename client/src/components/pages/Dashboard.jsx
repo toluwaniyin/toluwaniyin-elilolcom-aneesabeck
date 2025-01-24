@@ -3,16 +3,15 @@ import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
 import Stats from "../modules/Stats.jsx";
 import TreeCard from "../modules/TreeCard.jsx";
-import {HandleCreateTree} from "../modules/CreateTreeButton";
+import { HandleCreateTree } from "../modules/CreateTreeButton";
 
 import { get, post, del } from "../../utilities";
-
 
 const Dashboard = () => {
   // hardcoded data
   const userName = "Lolade";
   const [streak, setStreak] = useState(0);
-  const [treeNo, settreeNo] = useState(0);
+  //const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
 
   //GET streaks
@@ -51,7 +50,7 @@ const Dashboard = () => {
       setTrees(trees.filter((tree) => tree._id !== treeId));
     });
   };
-  
+
   let treesList = null;
   const hasTrees = trees.length !== 0;
   if (hasTrees) {
@@ -60,6 +59,7 @@ const Dashboard = () => {
       <TreeCard
         key={`TreeCard_${treeObj._id}`}
         name={treeObj.name}
+        treeId={treeObj._id}
         treeImgSrc={treeObj.image}
         onDelete={() => deleteTree(treeObj._id)}
       />
@@ -72,20 +72,18 @@ const Dashboard = () => {
     setTrees([...trees, tree]);
   };
 
-
   return (
-    <div className = "dashboard-container">
-      <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
+    <div className="dashboard-container">
+      <HandleCreateTree existingTrees={trees.map((tree) => tree.name)} createTree={createNewTree} />
       <Header />
-      <div className = "trees-section">
+      <div className="trees-section">
         <h1> My Trees </h1>
-        {hasTrees ? <div className = "trees-grid">{treesList}</div> : <p>No trees available.</p>}
-        </div>
-        <div className = "stats-section"> 
+        {hasTrees ? <div className="trees-grid">{treesList}</div> : <p>No trees available.</p>}
+      </div>
+      <div className="stats-section">
         <h1>My Stats</h1>
         <h3>Your streak is {streak}</h3>
-        </div>
-      
+      </div>
     </div>
   );
 };

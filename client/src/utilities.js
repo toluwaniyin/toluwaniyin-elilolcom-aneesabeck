@@ -74,3 +74,16 @@ export function del(endpoint, params = {}) {
       throw `DELETE request to ${fullPath} failed with error:\n${error}`;
     });
 }
+
+export function put(endpoint, params = {}) {
+  return fetch(endpoint, {
+    method: "put",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(params),
+  })
+    .then(convertToJSON) // Convert result to JSON object
+    .catch((error) => {
+      // Provide a useful error message
+      throw `PUT request to ${endpoint} failed with error:\n${error}`;
+    });
+}

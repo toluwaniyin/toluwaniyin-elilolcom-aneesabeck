@@ -40,6 +40,15 @@ router.get("/user", (req, res) => {
   });
 });
 
+//GET request to get name of one tree
+router.get("/tree_name", (req, res) => {
+  console.log("id: ", req.query.treeId);
+  Tree.findById(req.query.treeId).then((tree) => {
+    console.log(tree);
+    res.send(tree);
+  });
+});
+
 //GET request all trees from the database and send back
 router.get("/tree", (req, res) => {
   Tree.find({}).then((trees) => {
@@ -47,22 +56,49 @@ router.get("/tree", (req, res) => {
   });
 });
 
-//POST request
+//POST request for new tree
 router.post("/tree", (req, res) => {
   const newTree = new Tree({
     name: req.body.name,
-    image: "/treeIcon.jpg"
+    image: "/treeIcon.jpg",
+    progress: 0,
   });
-  console.log("added Tree")
+  console.log("added Tree");
   newTree.save().then((tree) => res.send(tree));
+});
+
+//GET REQUEST TO UPDATE PROGRESS OF TREE
+router.get("/treeprogress", (req, res) => {
+  Tree.findById(req.query.treeId).then((tree) => {
+    res.send(tree);
+  });
+});
+
+//PUT REQUEST to update progress of an existing tree
+router.post("/treeprogress", (req, res) => {
+  const treeId = req.body.treeId;
+  const newProgress = req.body.progress;
+  Tree.findByIdAndUpdate(
+    treeId, // Find tree by ID from URL parameter
+    newProgress // Update the progress field
+  )
+    .then((updatedTree) => {
+      if (!updatedTree) {
+        return res.status(404).send("Tree not found");
+      }
+      res.send(updatedTree);
+    })
+    .catch((err) => {
+      console.error("Error updating progress:", err);
+      res.status(500).send("Internal server error");
+    });
 });
 
 //DELETE request
 router.delete("/tree/:id", (req, res) => {
-  
-  console.log("DELETE request received")
+  console.log("DELETE request received");
   const treeId = req.params.id;
- 
+
   Tree.findByIdAndDelete(treeId)
     .then((deletedTree) => {
       if (deletedTree) {
@@ -79,7 +115,6 @@ router.delete("/tree/:id", (req, res) => {
     });
 });
 
-
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user)
@@ -91,12 +126,10 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-
-
 //POST /api/trees endpoint
 //TO DO
 
-//POST /api/streak endpoint
+//GET Progress
 
 //POST REQUEST FOR STREAK
 router.post("/streak", (req, res) => {
