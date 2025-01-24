@@ -1,10 +1,15 @@
 .progress-container {
-  width: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  width: 100%; /* Make the container take the full width */
   margin-top: 200px;
 }
 
 .progress-bar {
-  width: 100%;
+  width: 100%; /* Make the progress bar take the full width of its container */
+  max-width: 500px; /* Set a maximum width for the progress bar */
   height: 30px;
   border-radius: 10px;
   background-color: #e6e6e6;
@@ -23,6 +28,7 @@
   font-size: 24px;
   font-weight: bold;
   color: #444444;
+  text-align: center; /* Center the label text */
 }
 
 .progress-button {
@@ -45,11 +51,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 50px 0;
 }
 
 .tree-image {
   width: 150px; /* Default size */
-  height: auto;
-  transition: width 0.3s ease;
+  height: auto; /* Maintain aspect ratio */
+  max-width: 500px; /* Set a maximum width */
+  border-radius: 10px;
 }

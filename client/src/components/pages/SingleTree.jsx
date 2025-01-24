@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../modules/ProgressBar";
 import { get } from "../../utilities";
 import NavBar from "../modules/NavBar";
+import "./SingleTree.css";
 
 const SingleTreeDetail = (props) => {
   const { treeId } = useParams();
@@ -16,10 +17,17 @@ const SingleTreeDetail = (props) => {
   }, [treeId]);
 
   return (
-    <div>
-      <NavBar />
-      <h1>Tree {<ProgressBar treeId={treeId} />}</h1>
-      <h1>Tree: {treeName} </h1>
+    <div> 
+        <NavBar />
+        <div className="single-tree-container">
+        <div className="single-tree-content">
+            <div className="single-tree-card">
+            <h2>Progress:</h2>
+            <ProgressBar treeId={treeId} />
+            </div>
+            <h2>Tree Name: {treeName}</h2>
+        </div>
+        </div>
     </div>
   );
 };
