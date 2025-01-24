@@ -9,26 +9,25 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
-} from 'react-router-dom'
+  RouterProvider,
+} from "react-router-dom";
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import Dashboard from "./components/pages/Dashboard";
 import SingleTree from "./components/pages/SingleTree";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "302957686074-f03ek18k1rivju4hn5dkpd4nlap770ln.apps.googleusercontent.com";
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}/>
-      <Route path="/tree/:treeName" element ={<SingleTree />} />
+      <Route path="/tree/:treeId" element ={<SingleTree />} />
     </Route>
   )
-)
+);
 
 // renders React Component "Root" into the DOM element with ID "root"
 ReactDOM.createRoot(document.getElementById("root")).render(

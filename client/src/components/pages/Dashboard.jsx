@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Dashboard.css";
 import Header from "../modules/Header.jsx";
 import TreeCard from "../modules/TreeCard.jsx";
-import {HandleCreateTree} from "../modules/CreateTreeButton";
+import { HandleCreateTree } from "../modules/CreateTreeButton";
 import { UserContext } from "../App.jsx";
 import { get, post, del } from "../../utilities";
 import NavBar from "../modules/NavBar.jsx";
@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [user, setUser] = useState(undefined); //**** */
 
   const [streak, setStreak] = useState(0);
-  const [treeNo, settreeNo] = useState(0);
+  //const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
   console.log("user", userContext.userId)
 
@@ -27,18 +27,18 @@ const Dashboard = () => {
     //   }
     console.log("userid:", userContext.userId);
     if (userContext.userId){
-        get("/api/user",{userId: userContext.userId}).then((userResponse) => { 
+        get("/api/user",{userId: userContext.userId}).then((userResponse) => {
 
             if (userResponse) {
               setUser(userResponse)
               // console.log("User Name:", userResponse.name)
-      
+
               // let streak = userResponse.streak;
               // setStreak(streak);
-              
+
               // setUserName(userResponse.name);
             }
-            
+
           }).catch((err) => {
               console.error("Error fetching user:", err);
           });
@@ -78,21 +78,22 @@ const Dashboard = () => {
       setTrees(trees.filter((tree) => tree._id !== treeId));
     });
   };
-  
+
   let treesList = null;
   const hasTrees = trees.length !== 0;
   if (hasTrees) {
     //not sure what TreeCard is doing here
     treesList = trees.map((treeObj) => (
-        
+
       <TreeCard
         key={`TreeCard_${treeObj._id}`}
         name={treeObj.name}
+        treeId={treeObj._id}
         treeImgSrc={treeObj.image}
         onDelete={() => deleteTree(treeObj._id)}
         userId= {treeObj.userid}
       />
-      
+
     ));
   }
 
@@ -102,29 +103,27 @@ const Dashboard = () => {
     setTrees([...trees, tree]);
   };
 
-
   return (
     <div>
       <NavBar />
     <div className = "dashboard-container">
-      
+
         <div className="create-tree-button">
         <HandleCreateTree existingTrees={trees.map(tree => tree.name)} createTree={createNewTree} />
         </div>
-      
+
       {(userContext.userId != null) && user && <Header username = {user.name}/>}
       <div className = "trees-section">
         <h1> My Trees </h1>
-        {hasTrees ? <div className = "trees-grid">{treesList}</div> : <p>No trees available.</p>}
-        </div>
-        <div className = "stats-section"> 
+        {hasTrees ? <div className="trees-grid">{treesList}</div> : <p>No trees available.</p>}
+      </div>
+      <div className="stats-section">
         <h1>My Stats</h1>
         <h3>Your streak is {streak}</h3>
-        </div>
-      
+      </div>
     </div>
     </div>
-    
+
   );
 };
 

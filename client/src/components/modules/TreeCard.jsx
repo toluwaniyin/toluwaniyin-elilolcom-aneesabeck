@@ -7,20 +7,19 @@ const TreeCard = (props) => {
   const navigate = useNavigate();
 
   const handleTreeCard = () => {
-    navigate(`/tree/${props.name}`); 
+    navigate(`/tree/${props.treeId}`);
   };
 
   return (
     <div className="tree-card-container">
       <div className="tree-card" onClick={handleTreeCard}>
-      <img src={props.treeImgSrc} />
-      <p>{props.name}</p>
+        <img src={props.treeImgSrc} />
+        <p>{props.name}</p>
+      </div>
+      <button className="delete-button" onClick={props.onDelete}>
+        Delete Tree
+      </button>
     </div>
-    <button className="delete-button" onClick={props.onDelete}>
-      Delete Tree
-    </button>
-    </div>
-    
   );
 };
 
