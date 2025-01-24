@@ -89,6 +89,7 @@ const Dashboard = () => {
         key={`TreeCard_${treeObj._id}`}
         name={treeObj.name}
         treeId={treeObj._id}
+        progress={treeObj.progress}
         treeImgSrc={treeObj.image}
         onDelete={() => deleteTree(treeObj._id)}
         userId= {treeObj.userid}

@@ -15,6 +15,7 @@ const TreeCard = (props) => {
       <div className="tree-card" onClick={handleTreeCard}>
         <img src={props.treeImgSrc} />
         <p>{props.name}</p>
+        <p>progress: {props.progress}%</p>
       </div>
       <button className="delete-button" onClick={props.onDelete}>
         Delete Tree
