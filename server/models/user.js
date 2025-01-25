@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: String,
   googleid: String,
-  // streak: Number,
-  // lastUpdatedDate: Date,
+  lastLogin: Number,
+  streak: Number,
 });
 
 // compile model from schema

@@ -23,11 +23,15 @@ function getOrCreateUser(user) {
   return User.findOne({ googleid: user.sub }).then((existingUser) => {
     if (existingUser) return existingUser;
 
+    const firstLogin = Math.floor(new Date().getTime() / 86400000);
+
     const newUser = new User({
       name: user.name,
       googleid: user.sub,
+      lastLogin: firstLogin,
       streak: 0,
-      lastUpdatedDate: null,
+      // streak: 0,
+      // lastUpdatedDate: null,
     });
 
     return newUser.save();
@@ -39,6 +43,15 @@ function login(req, res) {
     .then((user) => getOrCreateUser(user))
     .then((user) => {
       // persist user in the session
+      const today = Math.floor(new Date().getTime() / 86400000);
+      if (today - user.lastLogin >= 1 && today - user.lastLogin <= 2) {
+        user.streak += 1;
+        user.lastLogin = today;
+      } else if (today - user.lastLogin > 2) {
+        user.streak = 0;
+        user.lastLogin = today;
+      }
+      user.save();
       req.session.user = user;
       res.send(user);
     })

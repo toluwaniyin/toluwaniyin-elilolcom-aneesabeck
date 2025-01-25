@@ -33,6 +33,7 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      console.log("user streak: ", user.streak);
       post("/api/initsocket", { socketid: socket.id });
     });
   };

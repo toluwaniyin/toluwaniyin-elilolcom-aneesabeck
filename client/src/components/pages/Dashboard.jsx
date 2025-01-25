@@ -10,6 +10,7 @@ import NavBar from "../modules/NavBar.jsx";
 const Dashboard = () => {
 
   const userContext = useContext(UserContext);
+  console.log("userContext", userContext.streak);
   // hardcoded data
   const [user, setUser] = useState(undefined); //**** */
 
@@ -31,10 +32,10 @@ const Dashboard = () => {
 
             if (userResponse) {
               setUser(userResponse)
-              // console.log("User Name:", userResponse.name)
+              console.log("User Name:", userResponse.name)
 
-              // let streak = userResponse.streak;
-              // setStreak(streak);
+              let streak = userResponse.streak;
+              setStreak(streak);
 
               // setUserName(userResponse.name);
             }
