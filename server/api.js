@@ -6,14 +6,15 @@
 | This file defines the routes for your server.
 |
 */
+require("dotenv").config();
 
 const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
 const Tree = require("./models/tree");
-//const axios = require("axios");
-//const OPENAI_API_KEY = "your-api-key-here";
+const axios = require("axios");
+const OPENAI_API_KEY = process.env.API_KEY;
 
 // import authentication library
 const auth = require("./auth");
@@ -37,13 +38,15 @@ router.get("/whoami", (req, res) => {
 
 //GET request for streaks-returning whole user back
 router.get("/user", (req, res) => {
-  console.log(req.query.userId)
-  User.findById(req.query.userId).then((user) => {
-    console.log("User found")
-    res.send(user);
-  }).catch((err)=>{
-    console.log("MongoDB couldn't find user")
-  });
+  console.log(req.query.userId);
+  User.findById(req.query.userId)
+    .then((user) => {
+      console.log("User found");
+      res.send(user);
+    })
+    .catch((err) => {
+      console.log("MongoDB couldn't find user");
+    });
 });
 
 //GET request to get name of one tree
@@ -58,7 +61,7 @@ router.get("/tree_name", (req, res) => {
 //GET request all trees from the database and send back
 router.get("/tree", (req, res) => {
   if (req.user) {
-    Tree.find({userid: req.user._id}).then((trees) => res.send(trees));
+    Tree.find({ userid: req.user._id }).then((trees) => res.send(trees));
   }
 });
 //   }
@@ -78,27 +81,32 @@ router.post("/tree", async (req, res) => {
     learningTopic: req.body.learningTopic,
   });
 
-  // opnai
-  // const response = await axios.post(
-  //   "https://api.openai.com/v1/chat/completions",
-  //   {
-  //     model: "gpt-4", // Specify the model (e.g., gpt-4)
-  //     messages: [
-  //       { role: "system", content: "You are a helpful assistant." },
-  //       { role: "user", content: `I'm looking to learn about ${userInput}` },
-  //     ],
-  //     max_tokens: 60, // Limit the length of the response
-  //   },
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${OPENAI_API_KEY}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   }
-  // );
+  try {
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          { role: "user", content: `I'm looking to learn about ${req.body.learningTopic}` },
+        ],
+        max_tokens: 60,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error calling OpenAI API:", error.response?.data || error.message);
+    return res.status(500).send("Error processing OpenAI API request.");
+  }
 
   //parse response here
-
 
   console.log("added Tree");
   newTree.save().then((tree) => res.send(tree));
@@ -167,7 +175,6 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
-
 
 //POST /api/trees endpoint
 //TO DO
