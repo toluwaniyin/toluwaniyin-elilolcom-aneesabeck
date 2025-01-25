@@ -15,6 +15,7 @@ const User = require("./models/user");
 const Tree = require("./models/tree");
 const axios = require("axios");
 const OPENAI_API_KEY = process.env.API_KEY;
+console.log(OPENAI_API_KEY);
 
 // import authentication library
 const auth = require("./auth");
@@ -88,9 +89,21 @@ router.post("/tree", async (req, res) => {
         model: "gpt-3.5-turbo",
         messages: [
           { role: "system", content: "You are a helpful assistant." },
-          { role: "user", content: `I'm looking to learn about ${req.body.learningTopic}` },
+          {
+            role: "user",
+            content: `Give me a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
+          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt the topic. This is a sample
+          of how i want my response. You MUST return it in ths format, "Step 1: Understand the Basics of Gardening
+          - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
+          - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
+          Multiple Choice Question:
+          1. What are some fundamental concepts of gardening?
+             A) Soil, books, air, water
+             B) Soil, sunlight, water, plant types
+             C) Soil, cars, planets, flowers" `,
+          },
         ],
-        max_tokens: 60,
+        max_tokens: 600,
       },
       {
         headers: {
@@ -100,13 +113,42 @@ router.post("/tree", async (req, res) => {
       }
     );
 
+    const gptResponse = response.data.choices[0].message.content;
+
+    const parseSteps = (gptResponse) => {
+      const steps = gptResponse.split(/\n(?=Step \d+:)/);
+      const instructionsDict = {};
+      const questionsDict = {};
+
+      steps.forEach((step) => {
+        const stepMatch = step.match(/Step (\d+): (.+?)\n/);
+        const instructionMatch = step.match(/- (.+?)\n- Link:/s);
+        const questionMatch = step.match(/Multiple Choice Question:\n(.+)/s);
+
+        if (stepMatch) {
+          const stepNumber = stepMatch[1];
+          const instruction = instructionMatch ? instructionMatch[1].trim() : "";
+          const question = questionMatch ? questionMatch[1].trim() : "";
+
+          instructionsDict[stepNumber] = instruction;
+          questionsDict[stepNumber] = question;
+        }
+      });
+
+      return { instructionsDict, questionsDict };
+    };
+
+    const { instructionsDict, questionsDict } = parseSteps(gptResponse);
+
+    console.log("Instructions Dictionary:", instructionsDict);
+    console.log("Questions Dictionary:", questionsDict);
+
     console.log(response.data);
+    console.log("RESPONSE IS", response.data.choices[0].message.content);
   } catch (error) {
     console.error("Error calling OpenAI API:", error.response?.data || error.message);
     return res.status(500).send("Error processing OpenAI API request.");
   }
-
-  //parse response here
 
   console.log("added Tree");
   newTree.save().then((tree) => res.send(tree));
