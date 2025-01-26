@@ -83,6 +83,7 @@ router.post("/tree", async (req, res) => {
   });
 
   try {
+    //Call OpenAI API
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
@@ -92,8 +93,8 @@ router.post("/tree", async (req, res) => {
           {
             role: "user",
             content: `Give me a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
-          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt the topic. This is a sample
-          of how i want my response. You MUST return it in ths format, "Step 1: Understand the Basics of Gardening
+          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt the topic. This is
+          a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
           - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
           - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
           Multiple Choice Question:
@@ -103,7 +104,7 @@ router.post("/tree", async (req, res) => {
              C) Soil, cars, planets, flowers" `,
           },
         ],
-        max_tokens: 600,
+        max_tokens: 4000,
       },
       {
         headers: {
@@ -113,7 +114,7 @@ router.post("/tree", async (req, res) => {
       }
     );
 
-    const gptResponse = response.data.choices[0].message.content;
+    //const gptResponse = response.data.choices[0].message.content;
 
     const parseSteps = (gptResponse) => {
       const steps = gptResponse.split(/\n(?=Step \d+:)/);
@@ -128,7 +129,12 @@ router.post("/tree", async (req, res) => {
         if (stepMatch) {
           const stepNumber = stepMatch[1];
           const instruction = instructionMatch ? instructionMatch[1].trim() : "";
-          const question = questionMatch ? questionMatch[1].trim() : "";
+          const question = questionMatch
+            ? questionMatch[1]
+                .trim()
+                .replace(/^(\d+\.\s+)/, "") // Remove question number prefix
+                .replace(/\n\s+/g, " ") // Remove newlines and extra spaces
+            : "";
 
           instructionsDict[stepNumber] = instruction;
           questionsDict[stepNumber] = question;
@@ -139,6 +145,14 @@ router.post("/tree", async (req, res) => {
     };
 
     const { instructionsDict, questionsDict } = parseSteps(gptResponse);
+
+    // Add parsed GPT response to the Tree object
+    newTree.gptResponseInstructions = instructionsDict;
+    newTree.gptResponseQuestions = questionsDict;
+
+    // Save to MongoDB
+    const savedTree = await newTree.save();
+    console.log("Added Tree:", savedTree);
 
     console.log("Instructions Dictionary:", instructionsDict);
     console.log("Questions Dictionary:", questionsDict);

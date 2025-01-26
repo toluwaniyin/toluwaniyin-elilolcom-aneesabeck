@@ -52,29 +52,6 @@ const ProgressBar = ({ treeId }) => {
     }
   };
 
-  // const getTree = () => {
-  //   if (progress==10) {
-  //       return
-  //   } else if (progress ==20) {
-  //       return
-  //   } else if (progress ==30) {
-  //       return
-  //   } else if (progress ==40) {
-  //       return
-  //   } else if (progress ==50) {
-  //       return
-  //   } else if (progress ==60) {
-  //       return
-  //   } else if (progress ==70) {
-  //       return
-  //   } else if (progress ==80) {
-  //       return
-  //   } else if (progress ==90) {
-  //       return
-  //   } else {
-  //       return "#2ecc71";
-  // }
-
   return (
     <div className="progress-container">
       <div className="progress-bar">
@@ -100,7 +77,7 @@ const ProgressBar = ({ treeId }) => {
           className="tree-image"
         />
       </div>
-      
+
       <div className="button-container">
       <button className="progress-button" onClick={handleButtonClick}>
         Grow
