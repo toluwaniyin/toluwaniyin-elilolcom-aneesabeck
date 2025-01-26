@@ -97,7 +97,7 @@ const Dashboard = () => {
 
     ));
   }
-
+  
   //POST trees
   //gets called when create new tree is hit to add to screen
   const createNewTree = (tree) => {

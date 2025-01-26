@@ -93,7 +93,7 @@ router.post("/tree", async (req, res) => {
           {
             role: "user",
             content: `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
-          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt from that link you
+          about the topic then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that link you
           provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
           - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
           - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
