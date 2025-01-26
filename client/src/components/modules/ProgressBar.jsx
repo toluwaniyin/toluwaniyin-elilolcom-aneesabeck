@@ -7,6 +7,9 @@ const ProgressBar = ({ treeId }) => {
   const [instructions, setInstructions] = useState({});
   const [questions, setQuestions] = useState({});
   const [answers, setAnswers] = useState({});
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [currentAnswer, setCurrentAnswer] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState("");
 
   // GET Progress
   useEffect(() => {
@@ -23,18 +26,23 @@ const ProgressBar = ({ treeId }) => {
   }, [treeId]);
 
   const handleButtonClick = () => {
-    if (progress < 100) {
-      const updatedProgress = progress + 10;
-      setProgress(updatedProgress);
+    const currentStep = Math.floor(progress / 10) + 1;
+    setCurrentQuestion(questions[currentStep] || "No question available.");
+    setShowQuestion(true);
+  }
+  // const handleButtonClick = () => {
+  //   if (progress < 100) {
+  //     const updatedProgress = progress + 10;
+  //     setProgress(updatedProgress);
 
-      // POST progress
-      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-        (updatedTreeResponse) => {
-          console.log("Progress updated:", updatedTreeResponse);
-        }
-      );
-    }
-  };
+  //     // POST progress
+  //     post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+  //       (updatedTreeResponse) => {
+  //         console.log("Progress updated:", updatedTreeResponse);
+  //       }
+  //     );
+  //   }
+  // };
 
   const handleButtonReset = () => {
     setProgress(0);
@@ -45,15 +53,113 @@ const ProgressBar = ({ treeId }) => {
     });
   };
 
-  const getColor = () => {
-    if (progress < 40) {
-      return "#ff0000"; // Red for low progress
-    } else if (progress < 70) {
-      return "#ffa500"; // Orange for medium progress
-    } else {
-      return "#2ecc71"; // Green for high progress
-    }
-  };
+  const handleASubmit = () => {
+    const currentStep = Math.floor(progress / 10) + 1;
+    const currentAnswer = "A";
+    if (currentAnswer === answers[currentStep]) {
+        const updatedProgress = progress + 10;
+        setProgress(updatedProgress);
+  
+        // POST progress
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+      } else {
+        const updatedProgress = progress - 10;
+        if (updatedProgress < 0) {
+          setProgress(0);
+          } else {
+          setProgress(updatedProgress);
+          }
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+        alert("Incorrect answer. Try again!");
+      }
+      setShowQuestion(false);
+      setCurrentAnswer("");
+    };
+  
+  const handleBSubmit = () => {
+    const currentStep = Math.floor(progress / 10) + 1;
+    const currentAnswer = "B";
+    if (currentAnswer === answers[currentStep]) {
+        const updatedProgress = progress + 10;
+        setProgress(updatedProgress);
+  
+        // POST progress
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+      } else {
+        const updatedProgress = progress - 10;
+        if (updatedProgress < 0) {
+        setProgress(0);
+        } else {
+        setProgress(updatedProgress);
+        }
+
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+        alert("Incorrect answer. Try again!");
+      }
+      setShowQuestion(false);
+      setCurrentAnswer("");
+    };
+
+  const handleCSubmit = () => {
+    const currentStep = Math.floor(progress / 10) + 1;
+    const currentAnswer = "C";
+    if (currentAnswer === answers[currentStep]) {
+        const updatedProgress = progress + 10;
+        setProgress(updatedProgress);
+  
+        // POST progress
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+      } else {
+        const updatedProgress = progress - 10;
+        if (updatedProgress < 0) {
+          setProgress(0);
+          } else {
+          setProgress(updatedProgress);
+          }
+        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+          (updatedTreeResponse) => {
+            console.log("Progress updated:", updatedTreeResponse);
+          }
+        );
+        alert("Incorrect answer. Try again!");
+      }
+      setShowQuestion(false);
+      setCurrentAnswer("");
+    };
+
+// const handleAnswerChange = (event) => {
+//   setCurrentAnswer(event.target.value);
+// };
+
+const getColor = () => {
+if (progress < 40) {
+  return "#ff0000"; // Red for low progress
+} else if (progress < 70) {
+  return "#ffa500"; // Orange for medium progress
+} else {
+  return "#2ecc71"; // Green for high progress
+}
+};
 
   //GET Instructions
   useEffect(() => {
@@ -93,8 +199,8 @@ const ProgressBar = ({ treeId }) => {
 
   const currentStep = Math.floor(progress / 10) + 1;
   const currentInstruction = instructions[currentStep] || "Complete your progress to unlock more!";
-  const currentQuestion = questions[currentStep] || "No question available.";
-  const currentAnswer = answers[currentStep];
+  // const currentQuestion = questions[currentStep] || "No question available.";
+  // const currentAnswer = answers[currentStep];
 
   return (
     <div className="progress-container">
@@ -125,9 +231,6 @@ const ProgressBar = ({ treeId }) => {
       <div className="instruction-container">
         <h3>Step {currentStep}:</h3>
         <p>{currentInstruction}</p>
-        <p>
-          <strong>Question:</strong> {currentQuestion}
-        </p>
       </div>
 
       <div className="button-container">
@@ -138,6 +241,30 @@ const ProgressBar = ({ treeId }) => {
           Reset
         </button>
       </div>
+      {showQuestion && (
+        <div className="question-container">
+          <p>{currentQuestion}</p>
+          {/* <input
+            type="text"
+            placeholder="Enter your answer here"
+            value={currentAnswer}
+            onChange={handleAnswerChange}
+          /> */}
+          <p>Choose the correct answer:</p>
+          <div className="button-container"> 
+            <button className="progress-button" onClick={handleASubmit}>
+              A
+            </button>
+            <button className="progress-button" onClick={handleBSubmit}>
+              B
+            </button>
+            <button className="progress-button" onClick={handleCSubmit}>
+              C
+            </button>
+          </div>
+          
+        </div>
+      )}
     </div>
   );
 };
