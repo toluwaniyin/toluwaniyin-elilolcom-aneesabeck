@@ -4,6 +4,9 @@ import { get, post } from "../../utilities";
 
 const ProgressBar = ({ treeId }) => {
   const [progress, setProgress] = useState(0);
+  const [instructions, setInstructions] = useState({});
+  const [questions, setQuestions] = useState({});
+  const [answers, setAnswers] = useState({});
 
   // GET Progress
   useEffect(() => {
@@ -52,6 +55,47 @@ const ProgressBar = ({ treeId }) => {
     }
   };
 
+  //GET Instructions
+  useEffect(() => {
+    get(`/api/treeinstructions`, { treeId })
+      .then((treeResponse) => {
+        console.log(treeResponse);
+        setInstructions(treeResponse.gptResponseInstructions || {});
+      })
+      .catch((err) => {
+        console.error("Error fetching tree instructions:", err);
+      });
+  }, [treeId]);
+
+  //GET Questions
+  useEffect(() => {
+    get(`/api/treequestions`, { treeId })
+      .then((treeResponse) => {
+        console.log(treeResponse);
+        setQuestions(treeResponse.gptResponseQuestions || {});
+      })
+      .catch((err) => {
+        console.error("Error fetching tree questions:", err);
+      });
+  }, [treeId]);
+
+  //GET Answers
+  useEffect(() => {
+    get(`/api/treeanswers`, { treeId })
+      .then((treeResponse) => {
+        console.log(treeResponse);
+        setAnswers(treeResponse.gptResponseAnswers || {});
+      })
+      .catch((err) => {
+        console.error("Error fetching tree questions:", err);
+      });
+  }, [treeId]);
+
+  const currentStep = Math.floor(progress / 10) + 1;
+  const currentInstruction = instructions[currentStep] || "Complete your progress to unlock more!";
+  const currentQuestion = questions[currentStep] || "No question available.";
+  const currentAnswer = answers[currentStep];
+
   return (
     <div className="progress-container">
       <div className="progress-bar">
@@ -78,14 +122,22 @@ const ProgressBar = ({ treeId }) => {
         />
       </div>
 
+      <div className="instruction-container">
+        <h3>Step {currentStep}:</h3>
+        <p>{currentInstruction}</p>
+        <p>
+          <strong>Question:</strong> {currentQuestion}
+        </p>
+      </div>
+
       <div className="button-container">
-      <button className="progress-button" onClick={handleButtonClick}>
-        Grow
-      </button>
-      <button className="progress-button" onClick={handleButtonReset}>
-        Reset
-      </button>
-    </div>
+        <button className="progress-button" onClick={handleButtonClick}>
+          Grow
+        </button>
+        <button className="progress-button" onClick={handleButtonReset}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ const TreeSchema = new mongoose.Schema({
   learningTopic: String,
   gptResponseInstructions: Object,
   gptResponseQuestions: Object,
+  gptResponseAnswers: Object,
   //store tasks + questions - have to parse
 });
 

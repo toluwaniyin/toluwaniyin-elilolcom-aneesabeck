@@ -92,16 +92,16 @@ router.post("/tree", async (req, res) => {
           { role: "system", content: "You are a helpful assistant." },
           {
             role: "user",
-            content: `Give me a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
-          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt the topic. This is
-          a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
+            content: `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
+          about the topic then give me 3 multiple choice questions based on each step in the 10 step process to verify that the person actually learnt from that link you
+          provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
           - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
           - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
           Multiple Choice Question:
           1. What are some fundamental concepts of gardening?
              A) Soil, books, air, water
              B) Soil, sunlight, water, plant types
-             C) Soil, cars, planets, flowers" `,
+             C) Soil, cars, planets, flowers". Answer: B`,
           },
         ],
         max_tokens: 4000,
@@ -114,41 +114,62 @@ router.post("/tree", async (req, res) => {
       }
     );
 
-    //const gptResponse = response.data.choices[0].message.content;
+    const gptResponse = response.data.choices[0].message.content;
 
-    const parseSteps = (gptResponse) => {
-      const steps = gptResponse.split(/\n(?=Step \d+:)/);
+    console.log("GPT Response:", gptResponse);
+
+    const parseStepsCleaned = (gptResponse) => {
+      const steps = gptResponse.split("\nStep "); // Split response by steps
       const instructionsDict = {};
       const questionsDict = {};
+      const answersDict = {};
 
       steps.forEach((step) => {
-        const stepMatch = step.match(/Step (\d+): (.+?)\n/);
-        const instructionMatch = step.match(/- (.+?)\n- Link:/s);
-        const questionMatch = step.match(/Multiple Choice Question:\n(.+)/s);
+        step = step.startsWith("Step ") ? step : "Step " + step; // Add back 'Step' for processing
+
+        // Match the key elements
+        const stepMatch = step.match(/Step (\d+): (.+?)\n/); // Match step number and title
+        const instructionMatch = step.match(/Step \d+: (.+?)\nMultiple Choice Question:/s);
+        const questionMatch = step.match(/Multiple Choice Question:\s*([\s\S]*?)Answer:/s);
+        const answerMatch = step.match(/Answer:\s*(.+)/);
 
         if (stepMatch) {
-          const stepNumber = stepMatch[1];
-          const instruction = instructionMatch ? instructionMatch[1].trim() : "";
-          const question = questionMatch
-            ? questionMatch[1]
-                .trim()
-                .replace(/^(\d+\.\s+)/, "") // Remove question number prefix
-                .replace(/\n\s+/g, " ") // Remove newlines and extra spaces
-            : "";
+          const stepNumber = parseInt(stepMatch[1], 10); // Extract step number
 
+          // Clean the instruction text by removing "\n- " and extra newlines
+          let instruction = "";
+          if (instructionMatch) {
+            instruction = instructionMatch[1].trim();
+            instruction = instruction.replace(/\n-\s*/g, " "); // Remove "\n- " formatting
+          }
+
+          // Clean the question text by removing the number prefix (e.g., "1. ") and formatting
+          let question = "";
+          if (questionMatch) {
+            question = questionMatch[1].trim();
+            question = question.replace(/^\d+\.\s*/, ""); // Remove leading number and period
+            question = question.replace(/\n\s*/g, " "); // Remove newlines and extra spaces
+          }
+
+          // Extract and clean the answer
+          const answer = answerMatch ? answerMatch[1].trim() : "";
+
+          // Assign cleaned values to dictionaries
           instructionsDict[stepNumber] = instruction;
           questionsDict[stepNumber] = question;
+          answersDict[stepNumber] = answer;
         }
       });
 
-      return { instructionsDict, questionsDict };
+      return { instructionsDict, questionsDict, answersDict };
     };
 
-    const { instructionsDict, questionsDict } = parseSteps(gptResponse);
+    const { instructionsDict, questionsDict, answersDict } = parseStepsCleaned(gptResponse);
 
     // Add parsed GPT response to the Tree object
     newTree.gptResponseInstructions = instructionsDict;
     newTree.gptResponseQuestions = questionsDict;
+    newTree.gptResponseAnswers = answersDict;
 
     // Save to MongoDB
     const savedTree = await newTree.save();
@@ -199,6 +220,29 @@ router.post("/treeprogress", (req, res) => {
       res.status(500).send("Internal server error");
     });
 });
+
+//GET REQUEST TO GET INSTRUCTIONS OF TREE
+router.get("/treeinstructions", (req, res) => {
+  Tree.findById(req.query.treeId).then((tree) => {
+    res.send(tree);
+  });
+});
+
+//GET REQUEST TO GET MULTIPLE CHOICE QUESTIONS OF TREE
+router.get("/treequestions", (req, res) => {
+  Tree.findById(req.query.treeId).then((tree) => {
+    res.send(tree);
+  });
+});
+
+//
+//GET REQUEST TO GET ANSWERS OF TREE
+router.get("/treeanswers", (req, res) => {
+  Tree.findById(req.query.treeId).then((tree) => {
+    res.send(tree);
+  });
+});
+//
 
 //DELETE request
 router.delete("/tree/:id", (req, res) => {
