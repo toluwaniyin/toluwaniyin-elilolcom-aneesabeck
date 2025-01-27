@@ -4,6 +4,7 @@ import App from "./components/App";
 import Skeleton from "./components/pages/Skeleton";
 import NotFound from "./components/pages/NotFound";
 import LoginPage from "./components/pages/Login";
+import GrowWithFriends from "./components/pages/GrowWithFriends";
 
 import {
   createBrowserRouter,

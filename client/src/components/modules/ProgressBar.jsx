@@ -77,12 +77,8 @@ const ProgressBar = ({ treeId }) => {
           }
         );
       } else {
-        const updatedProgress = progress - 10;
-        if (updatedProgress < 0) {
-          setProgress(0);
-          } else {
-          setProgress(updatedProgress);
-          }
+        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
+        setProgress(updatedProgress);
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
             console.log("Progress updated:", updatedTreeResponse);
@@ -108,12 +104,8 @@ const ProgressBar = ({ treeId }) => {
           }
         );
       } else {
-        const updatedProgress = progress - 10;
-        if (updatedProgress < 0) {
-        setProgress(0);
-        } else {
+        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
         setProgress(updatedProgress);
-        }
 
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
@@ -140,12 +132,8 @@ const ProgressBar = ({ treeId }) => {
           }
         );
       } else {
-        const updatedProgress = progress - 10;
-        if (updatedProgress < 0) {
-          setProgress(0);
-          } else {
-          setProgress(updatedProgress);
-          }
+        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
+        setProgress(updatedProgress);
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
             console.log("Progress updated:", updatedTreeResponse);
@@ -251,7 +239,7 @@ if (progress < 40) {
           Reset
         </button>
       </div>
-      {showQuestion (
+      {showQuestion && (
         <div className="question-container">
           <p>{currentQuestion}</p>
           {/* <input
