@@ -66,3 +66,33 @@
   justify-content: center; /* Center the buttons horizontally */
   
 }
+
+.question-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.question-container p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.question-container input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.question-container button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.question-container button:hover {
+  background-color: #45a049;
+}

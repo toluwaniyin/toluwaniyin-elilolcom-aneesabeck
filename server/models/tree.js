@@ -11,6 +11,10 @@ const TreeSchema = new mongoose.Schema({
   userid: String,
   progress: Number,
   learningTopic: String,
+  gptResponseInstructions: Object,
+  gptResponseQuestions: Object,
+  gptResponseAnswers: Object,
+  customText: String,
   //store tasks + questions - have to parse
 });
 
