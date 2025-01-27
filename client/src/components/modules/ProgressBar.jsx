@@ -10,7 +10,16 @@ const ProgressBar = ({ treeId }) => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [showInstruction, setShowInstruction] = useState(true);
 
+  useEffect(() => {
+    if (Object.keys(instructions).length === 0) {
+      setShowInstruction(false);
+    } else {
+      setShowInstruction(true);
+    }
+  }, [instructions]);
+  
   // GET Progress
   useEffect(() => {
     get(`/api/treeprogress`, { treeId })
@@ -43,6 +52,7 @@ const ProgressBar = ({ treeId }) => {
   //     );
   //   }
   // };
+
 
   const handleButtonReset = () => {
     setProgress(0);
@@ -228,10 +238,10 @@ if (progress < 40) {
         />
       </div>
 
-      <div className="instruction-container">
+      {showInstruction && (<div className="instruction-container">
         <h3>Step {currentStep}:</h3>
         <p>{currentInstruction}</p>
-      </div>
+      </div>)}
 
       <div className="button-container">
         <button className="progress-button" onClick={handleButtonClick}>

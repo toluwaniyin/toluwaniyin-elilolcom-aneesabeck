@@ -80,7 +80,33 @@ router.post("/tree", async (req, res) => {
     userid: req.body.userid,
     progress: 0,
     learningTopic: req.body.learningTopic,
+    customText: req.body.customText,
   });
+  let userPrompt;
+  console.log("req.body.learningTopic", req.body.learningTopic);
+  console.log("req.body.customText", req.body.customText);
+  
+  if (req.body.learningTopic) {
+    userPrompt = `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
+    about the topic then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that link you
+    provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
+    - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
+    - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
+    Multiple Choice Question:
+    1. What are some fundamental concepts of gardening?
+       A) Soil, books, air, water
+       B) Soil, sunlight, water, plant types
+       C) Soil, cars, planets, flowers". Answer: B`;
+  } else if (req.body.customText) {
+    userPrompt = `Divide the following text into 10 steps: ${req.body.customText} .Then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that step you
+    provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
+    Insert step 1 division content.
+    Multiple Choice Question:
+    1. What are some fundamental concepts of gardening?
+       A) Soil, books, air, water
+       B) Soil, sunlight, water, plant types
+       C) Soil, cars, planets, flowers". Answer: B`;
+  }
 
   try {
     //Call OpenAI API
@@ -92,16 +118,17 @@ router.post("/tree", async (req, res) => {
           { role: "system", content: "You are a helpful assistant." },
           {
             role: "user",
-            content: `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
-          about the topic then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that link you
-          provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
-          - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
-          - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
-          Multiple Choice Question:
-          1. What are some fundamental concepts of gardening?
-             A) Soil, books, air, water
-             B) Soil, sunlight, water, plant types
-             C) Soil, cars, planets, flowers". Answer: B`,
+          //   content: `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
+          // about the topic then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that link you
+          // provided. Also end with the answer to the question This is a sample of how i want my response. You MUST return it in this format, "Step 1: Understand the Basics of Gardening
+          // - Learn about the fundamental concepts of gardening, including soil, sunlight, water, and plant types.
+          // - Link: [Introduction to Gardening Basics](https://www.almanac.com/content/gardening-for-beginners-10-easy-steps)
+          // Multiple Choice Question:
+          // 1. What are some fundamental concepts of gardening?
+          //    A) Soil, books, air, water
+          //    B) Soil, sunlight, water, plant types
+          //    C) Soil, cars, planets, flowers". Answer: B`,
+          content: userPrompt,
           },
         ],
         max_tokens: 4000,
@@ -167,7 +194,11 @@ router.post("/tree", async (req, res) => {
     const { instructionsDict, questionsDict, answersDict } = parseStepsCleaned(gptResponse);
 
     // Add parsed GPT response to the Tree object
+    if (req.body.learningTopic) {
     newTree.gptResponseInstructions = instructionsDict;
+    } else {
+      newTree.gptResponseInstructions = {};
+    }
     newTree.gptResponseQuestions = questionsDict;
     newTree.gptResponseAnswers = answersDict;
 
