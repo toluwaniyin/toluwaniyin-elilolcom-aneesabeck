@@ -25,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}/>
       <Route path="/tree/:treeId" element ={<SingleTree />} />
+      <Route path="/community" element={<GrowWithFriends />} />
     </Route>
   )
 );

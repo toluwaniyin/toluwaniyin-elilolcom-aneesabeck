@@ -251,7 +251,7 @@ if (progress < 40) {
           Reset
         </button>
       </div>
-      {showQuestion && (
+      {showQuestion (
         <div className="question-container">
           <p>{currentQuestion}</p>
           {/* <input
