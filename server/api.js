@@ -196,6 +196,36 @@ router.post("/streak", (req, res) => {
   res.send(currentStreak);
 });
 
+//GET request to fetch leaderboard data
+router.get("/trees/leaderboard", async (req, res) => {
+  try {
+    const trees = await Tree.find();
+    const validTrees = trees.filter(tree => tree.progress > 10);
+
+    const userScores = validTrees.reduce((acc, tree) => {
+      if (!acc[tree.userid]) {
+        acc[tree.userid] = { userid: tree.userid, totalProgress: 0, treeCount: 0 };
+      }
+      acc[tree.userid].totalProgress += tree.progress;
+      acc[tree.userid].treeCount += 1;
+      return acc;
+    }, {});
+
+    const leaderboard = Object.values(userScores).sort((a, b) => {
+      const scoreA = a.treeCount + a.totalProgress;
+      const scoreB = b.treeCount + b.totalProgress;
+      return scoreB - scoreA;
+    });
+
+    res.status(200).json(leaderboard);
+  } catch (error) {
+    console.error("Error fetching leaderboard:", error.message);
+    console.error(error.stack);
+    res.status(500).send("Internal server error");
+  }
+});
+
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
