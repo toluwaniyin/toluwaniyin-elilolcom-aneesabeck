@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
-import Skeleton from "./components/pages/Skeleton";
 import NotFound from "./components/pages/NotFound";
 import LoginPage from "./components/pages/Login";
-import GrowWithFriends from "./components/pages/GrowWithFriends";
+import Friends from "./components/pages/Friends";
 
 import {
   createBrowserRouter,
@@ -26,7 +25,6 @@ const router = createBrowserRouter(
       <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}/>
       <Route path="/tree/:treeId" element ={<SingleTree />} />
-      <Route path="/community" element={<GrowWithFriends />} />
     </Route>
   )
 );
