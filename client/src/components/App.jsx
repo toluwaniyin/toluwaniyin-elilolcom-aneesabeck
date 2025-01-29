@@ -47,7 +47,7 @@ const LoadingScreen = ({ onComplete }) => {
     >
       <div className="loading-container" style={{ textAlign: "center" }}>
         <img
-          src="/growing-tree-unscreen.gif"
+          src= "https://i.imgur.com/sJHuXct.gif"
           style={{ maxWidth: "100%", height: "auto" }}
         />
         <div
@@ -133,13 +133,14 @@ const App = () => {
       <AnimatePresence mode="wait">
         {isLoading ? (
           <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
-        ) : (
+         ) : (
           <motion.div
-            key="app-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+             key="app-content"
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             exit={{ opacity: 0 }}
+           >
+
             <Outlet />
           </motion.div>
         )}

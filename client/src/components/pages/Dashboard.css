@@ -27,9 +27,23 @@
   flex-wrap: wrap;  /* Allows items to wrap on smaller screens */
   justify-content: space-between;
   padding: 20px;
-  width: 90%;  /* Full width to adjust to screen */
+  width: 100%;  /* Full width to adjust to screen */
+}
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
 }
 
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .create-tree-section {
   display: flex;
   flex-direction: column;
@@ -52,7 +66,7 @@
   font-weight: 400;
   font-style: normal;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   margin-top: 40px;
 }
 

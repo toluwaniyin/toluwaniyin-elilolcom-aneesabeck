@@ -977,7 +977,7 @@ if (progress < 40) {
         }}
       >
         <img
-          src="/grow.png" // Replace with the path to your tree image
+          src="https://i.imgur.com/6bWgguS.png" // Replace with the path to your tree image
           alt="Growing Tree"
           className="tree-image"
         />

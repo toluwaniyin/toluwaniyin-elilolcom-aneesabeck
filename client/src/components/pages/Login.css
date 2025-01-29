@@ -1,0 +1,83 @@
+/* Full-page container */
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Video Background */
+.video-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Centering login title and button */
+.login-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px; /* Space between title and button */
+  z-index: 1;
+}
+
+/* Title Styling */
+.login-title {
+  font-family: 'Berkshire Swash', serif;
+  font-size: 8vw;
+  color: #4f772d;
+  text-align: center;
+  animation: growText 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Google Login Button */
+.google-login-button {
+  width: auto;
+}
+
+/* Title animation */
+@keyframes growText {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .login-title {
+    font-size: 10vw;
+  }
+
+  .google-login-button {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-title {
+    font-size: 12vw;
+  }
+
+  .google-login-button {
+    width: 90%;
+  }
+}

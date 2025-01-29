@@ -19,18 +19,12 @@ const SingleTreeDetail = (props) => {
   return (
     <div>
       <NavBar />
-      <div style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundImage: "url('/field (2).gif')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.7,
-        zIndex: -1,
-      }}></div>
+      <div className="video-background">
+        <video autoPlay loop muted playsInline>
+          <source src="https://i.imgur.com/Gr455X7.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       <div className="single-tree-container">
         <div className="single-tree-content">
           <h2>Grow your {treeName} tree!</h2>

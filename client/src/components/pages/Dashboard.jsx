@@ -95,22 +95,13 @@ const createNewTree = (tree) => {
 
 
   return (
-    <div>
-      <div
-        className="background-image"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: "url('/field (2).gif')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.7,
-          zIndex: -1,
-        }}
-      ></div>
+    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+    <div className="video-background">
+      <video autoPlay loop muted playsInline>
+        <source src="https://i.imgur.com/Gr455X7.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
       <NavBar />
       <div className="dashboard-all-container">
         <div className="header">

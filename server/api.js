@@ -487,7 +487,7 @@ router.post("/tree", async (req, res) => {
 
     const newTree = new Tree({
       name,
-      image: image || "/treeIcon.jpg",
+      image: image || "https://i.imgur.com/KwV6cm0.png",
       userid,
       progress: 0,
       learningTopic,
