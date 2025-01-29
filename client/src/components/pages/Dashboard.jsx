@@ -9,13 +9,14 @@ import NavBar from "../modules/NavBar.jsx";
 
 const Dashboard = () => {
   const userContext = useContext(UserContext);
-  console.log("userContext", userContext.streak);
+
   // hardcoded data
   const [user, setUser] = useState(undefined); //**** */
 
   const [streak, setStreak] = useState(0);
   //const [treeNo, settreeNo] = useState(0);
   const [trees, setTrees] = useState([]);
+  console.log("user", userContext.userId);
   console.log("user", userContext.userId);
 
   //GET streaks
@@ -32,10 +33,24 @@ const Dashboard = () => {
           if (userResponse) {
             setUser(userResponse);
             console.log("User Name:", userResponse.name);
+    if (userContext.userId) {
+      get("/api/user", { userId: userContext.userId })
+        .then((userResponse) => {
+          if (userResponse) {
+            setUser(userResponse);
+            console.log("User Name:", userResponse.name);
 
             let streak = userResponse.streak;
             setStreak(streak);
+            let streak = userResponse.streak;
+            setStreak(streak);
 
+            // setUserName(userResponse.name);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching user:", err);
+        });
             // setUserName(userResponse.name);
           }
         })
@@ -51,6 +66,11 @@ const Dashboard = () => {
   //       setStreak(updatedStreakResponse);
   //     });
   //   }, []);
+  //   useEffect(() => {
+  //     post("/api/streak", {}).then((updatedStreakResponse) => {
+  //       setStreak(updatedStreakResponse);
+  //     });
+  //   }, []);
 
   // GET treeNo
 
@@ -61,12 +81,18 @@ const Dashboard = () => {
   useEffect(() => {
     if (userContext.userId) {
       console.log("Fetching trees for user:", userContext.userId);
+      console.log("Fetching trees for user:", userContext.userId);
 
+      console.log("user", userContext.userId);
+      get(`/api/tree?userid=${userContext.userId}`).then((treesResponse) => {
+        //list trees in reverse order
       console.log("user", userContext.userId);
       get(`/api/tree?userid=${userContext.userId}`).then((treesResponse) => {
         //list trees in reverse order
         let reversedTreeObjs = treesResponse.reverse();
         setTrees(reversedTreeObjs);
+      });
+    }
       });
     }
   }, [userContext.userId]);
@@ -92,9 +118,11 @@ const Dashboard = () => {
         treeImgSrc={treeObj.image}
         onDelete={() => deleteTree(treeObj._id)}
         userId={treeObj.userid}
+        userId={treeObj.userid}
       />
     ));
   }
+
 
   //POST trees
   //gets called when create new tree is hit to add to screen

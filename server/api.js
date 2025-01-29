@@ -85,7 +85,7 @@ router.post("/tree", async (req, res) => {
   let userPrompt;
   console.log("req.body.learningTopic", req.body.learningTopic);
   console.log("req.body.customText", req.body.customText);
-  
+
   if (req.body.learningTopic) {
     userPrompt = `Give me exactly a 10 step process to learn about ${req.body.learningTopic} with links for each step so the person can go on to learn
     about the topic then give me 1 multiple choice questions for each step in the 10 step process to verify that the person actually learnt from that link you
@@ -361,6 +361,13 @@ router.get("/trees/leaderboard", async (req, res) => {
     console.error(error.stack);
     res.status(500).send("Internal server error");
   }
+});
+
+//GET request to find user by userid
+router.get("/leaderboardn", (req, res) => {
+  User.findById(req.query.treeId).then((user) => {
+    res.send(user);
+  });
 });
 
 
