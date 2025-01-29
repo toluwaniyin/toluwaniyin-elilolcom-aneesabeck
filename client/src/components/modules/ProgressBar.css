@@ -40,25 +40,34 @@
 .progress-button {
   background-color: #8b5e3c;
   border-radius: 6px;
-  border: none;
   color: white;
   cursor: pointer;
   font-size: 24px;
   height: 40px;
-  outline: 0;
+  width: 20%; /* Ensure it takes up available space */
   text-align: center;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
   margin-right: 10px;
   margin-top: 15px;
   font-family: "Jersey 15", serif;
   font-style: normal;
   font-weight: 400;
-
+  border: none; /* Uncomment if needed */
+  padding: 0; /* Ensure padding doesn't interfere */
 }
 
-.progress-button:hover{
+.progress-button:hover {
+  background-color: #6d4a2f;
+  transform: scale(1.05);
+}
+
+
+/* .progress-button:hover{
   background-color: #6d4a2f;
   transform: scale(1.05)
-}
+} */
 
 .tree-container {
   display: flex;
@@ -139,18 +148,20 @@
 }
 
 .instruction-container {
-  background: #fff;
+  background: #8b5e3c;
+  color: white;
+  opacity: 0.9;
   padding: 20px;
   margin-top: 10px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
   width: 90%;
   max-width: 600px;
 }
 
 .learn-more-link {
   font-size: 16px;
-  color: #007bff;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
   display: inline-flex;

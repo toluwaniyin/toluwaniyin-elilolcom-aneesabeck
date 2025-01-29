@@ -15,7 +15,7 @@ import "./App.css";
 
 const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -92,10 +92,10 @@ const App = () => {
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
-    console.log(`Logged in as ${decodedCredential.name}`);
+    // console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
-      console.log("user streak: ", user.streak);
+      // console.log("user streak: ", user.streak);
       post("/api/initsocket", { socketid: socket.id });
     });
   };

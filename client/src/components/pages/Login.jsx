@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleLoginSuccess = (credentialResponse) => {
     handleLogin(credentialResponse);
     navigate(`/dashboard`);
-    console.log("Login Success");
+    // console.log("Login Success");
   };
 
   return (

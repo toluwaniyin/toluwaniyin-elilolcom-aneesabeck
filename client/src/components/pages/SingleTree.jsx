@@ -10,14 +10,14 @@ const SingleTreeDetail = (props) => {
   const [treeName, setTreeName] = useState("");
 
   useEffect(() => {
-    console.log(treeId);
+    // console.log(treeId);
     get("/api/tree_name", { treeId: treeId }).then((tree) => {
       setTreeName(tree.name);
     });
   }, [treeId]);
 
   return (
-    <div> 
+    <div>
       <NavBar />
       <div style={{
         position: "fixed",

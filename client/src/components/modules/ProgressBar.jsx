@@ -804,7 +804,7 @@ const ProgressBar = ({ treeId }) => {
 
     // POST progress
     post(`/api/treeprogress`, { treeId: treeId, progress: 0 }).then((resetResponse) => {
-      console.log("Progress reset:", resetResponse);
+      // console.log("Progress reset:", resetResponse);
     });
   };
 
@@ -818,7 +818,7 @@ const ProgressBar = ({ treeId }) => {
         // POST progress
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
       } else {
@@ -826,7 +826,7 @@ const ProgressBar = ({ treeId }) => {
         setProgress(updatedProgress);
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
         Swal.fire({
@@ -849,7 +849,7 @@ const ProgressBar = ({ treeId }) => {
         // POST progress
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
       } else {
@@ -858,7 +858,7 @@ const ProgressBar = ({ treeId }) => {
 
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
         Swal.fire({
@@ -881,7 +881,7 @@ const ProgressBar = ({ treeId }) => {
         // POST progress
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
       } else {
@@ -889,7 +889,7 @@ const ProgressBar = ({ treeId }) => {
         setProgress(updatedProgress);
         post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
           (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
+            // console.log("Progress updated:", updatedTreeResponse);
           }
         );
         Swal.fire({

@@ -38,10 +38,10 @@ router.get("/whoami", (req, res) => {
 
 //GET request for streaks-returning whole user back
 router.get("/user", (req, res) => {
-  console.log(req.query.userId);
+  // console.log(req.query.userId);
   User.findById(req.query.userId)
     .then((user) => {
-      console.log("User found");
+      // console.log("User found");
       res.send(user);
     })
     .catch((err) => {
@@ -53,7 +53,7 @@ router.get("/user", (req, res) => {
 router.get("/tree_name", (req, res) => {
   console.log("id: ", req.query.treeId);
   Tree.findById(req.query.treeId).then((tree) => {
-    console.log(tree);
+    // console.log(tree);
     res.send(tree);
   });
 });
@@ -474,17 +474,16 @@ router.post("/tree", async (req, res) => {
       return res.status(500).json({ error: "OpenAI API returned an empty response." });
     }
 
-    console.log("GPT Response:", gptResponse);
+    // console.log("GPT Response:", gptResponse);
 
     let { gptResponseInstructions, gptResponseQuestions, gptResponseAnswers, gptResponseLinks } =
       parseGptResponse(gptResponse);
 
-    console.log("All links:", gptResponseLinks);
+    // console.log("All links:", gptResponseLinks);
 
-
-    console.log("🔍 Validating Links...");
+    // console.log("🔍 Validating Links...");
     gptResponseLinks = await validateLinks(gptResponseLinks);
-    console.log("✅ Valid Links:", gptResponseLinks);
+    // console.log("✅ Valid Links:", gptResponseLinks);
 
     const newTree = new Tree({
       name,
@@ -502,18 +501,12 @@ router.post("/tree", async (req, res) => {
     const savedTree = await newTree.save();
     console.log("🌳 Tree Created Successfully:", savedTree);
 
-    res.json({
-      message: "Tree created successfully",
-      tree: savedTree,
-      instructions: gptResponseInstructions,
-      questions: gptResponseQuestions,
-      answers: gptResponseAnswers,
-      links: gptResponseLinks,
-    });
+    res.send(savedTree);
   } catch (error) {
     console.error("🚨 Error in /tree API:", error.response?.data || error.message);
     res.status(500).json({ error: "Error processing OpenAI API request." });
   }
+  // newTree.save().then((tree) => res.send(tree));
 });
 
 //GET REQUEST TO UPDATE PROGRESS OF TREE
