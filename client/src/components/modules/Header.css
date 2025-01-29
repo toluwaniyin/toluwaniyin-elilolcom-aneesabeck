@@ -1,11 +1,30 @@
 .dashboard-header {
     /* background: #8b5e3c; Soft green gradient */
-    padding: 20px;
+    padding: 0px 20px;
     border-radius: 8px;
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); */
     text-align: left;
     /* margin-bottom: 20px; */
   }
+  /* Blinking cursor effect while typing */
+  .typing::after {
+    content: "|"; /* Cursor */
+    display: inline-block;
+    animation: blink 0.7s steps(2, start) infinite;
+  }
+
+  /* Remove cursor when done */
+  .done::after {
+    content: ""; /* Removes cursor */
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  
   
   .dashboard-header h1 {
     color: #8b5e3c; /* Deep green for the main header */

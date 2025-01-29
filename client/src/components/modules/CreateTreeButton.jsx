@@ -1,18 +1,29 @@
 import React, { useState, useContext } from "react";
 import { post } from "../../utilities";
 import { UserContext } from "../App.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import "./CreateTreeButton.css";
+import Swal from 'sweetalert2';
+import '@sweetalert2/theme-dark/dark.css';
+
 
 export const HandleCreateTree = (props) => {
   const userContext = useContext(UserContext);
   const addTree = (treeName, learningTopic, customText) => {
     if (!treeName) {
-      toast.error(`Enter a name for your tree`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Enter a name for your tree',
+      });
       return;
     }
     if (props.existingTrees.includes(treeName)) {
-      toast.error(`Tree "${treeName}" already exists.`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Tree "${treeName}" already exists.`,
+      });
       return; // Exit early if treeName exists
     }
     const body = {
@@ -32,7 +43,7 @@ export const HandleCreateTree = (props) => {
   return (
     <>
       <CreateTreeButton onSubmit={addTree} />
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 };

@@ -9,23 +9,25 @@ import { socket } from "../client-socket";
 import { get, post } from "../utilities";
 
 import { AnimatePresence } from "framer-motion";
-
+import { motion } from "framer-motion";
 export const UserContext = createContext(null);
 import "./App.css";
 
 const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          onComplete(); // Notify App that loading is complete
+          onComplete();
+          // return 100;
         }
-        return prev + 1;
+        return prev + 1; // Slower increment
       });
-    }, 30); // Adjust the speed of the progress bar
+    }, 30); // Slower update interval
+
     return () => clearInterval(interval);
   }, [onComplete]);
 
@@ -35,13 +37,23 @@ const LoadingScreen = ({ onComplete }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="loading-screen"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh", // Full viewport height
+        flexDirection: "column",
+      }}
     >
-      <div className="loading-container">
+      <div className="loading-container" style={{ textAlign: "center" }}>
         <img
-          src="/loadingtree.gif"
-          style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+          src="/growing-tree-unscreen.gif"
+          style={{ maxWidth: "100%", height: "auto" }}
         />
-        <div className="loading-bar-wrapper" style={{ marginLeft: 400, marginRight: 400 }}>
+        <div
+          className="loading-bar-wrapper"
+          style={{ width: "50%", margin: "20px auto" }}
+        >
           <div
             className="loading-bar"
             style={{
@@ -57,6 +69,7 @@ const LoadingScreen = ({ onComplete }) => {
   );
 };
 
+
 /**
  * Define the "App" component
  */
@@ -64,6 +77,7 @@ const App = () => {
   const [trees, setTrees] = useState([]);
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -93,6 +107,10 @@ const App = () => {
     navigate(`/`);
   };
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   const authContextValue = {
     userId,
     handleLogin,
@@ -101,33 +119,33 @@ const App = () => {
     setTrees,
   };
 
-  return (
-    <div className="App-container">
-      <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
-        <Outlet />
-      </UserContext.Provider>
-    </div>
-  );
-};
-
 //   return (
-//     <UserContext.Provider value={authContextValue}>
-//       <AnimatePresence mode="wait">
-//         {isLoading ? (
-//           <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
-//         ) : (
-//           <motion.div
-//             key="app-content"
-//             initial={{ opacity: 0 }}
-//             animate={{ opacity: 1 }}
-//             exit={{ opacity: 0 }}
-//           >
-//             <Outlet />
-//           </motion.div>
-//         )}
-//       </AnimatePresence>
-//     </UserContext.Provider>
+//     <div className="App-container">
+//       <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
+//         <Outlet />
+//       </UserContext.Provider>
+//     </div>
 //   );
 // };
+
+  return (
+    <UserContext.Provider value={authContextValue}>
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
+        ) : (
+          <motion.div
+            key="app-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Outlet />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </UserContext.Provider>
+  );
+};
 
 export default App;

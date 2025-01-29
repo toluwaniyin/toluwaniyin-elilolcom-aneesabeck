@@ -12,7 +12,7 @@
   max-width: 500px; /* Set a maximum width for the progress bar */
   height: 30px;
   border-radius: 10px;
-  background-color: #e6e6e6;
+  background-color: #e2c8b4;
   margin-bottom: 10px;
 }
 
@@ -31,19 +31,35 @@
   text-align: center; /* Center the label text */
 }
 
+.question-content {
+  /* text-align: center; */
+  font-family: "Jersey 15", serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 400;
+}
 .progress-button {
-  background-color: rgb(10, 110, 171);
+  background-color: #8b5e3c;
   border-radius: 6px;
   border: 0;
   box-sizing: border-box;
   color: #eee;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 24px;
   height: 40px;
   outline: 0;
   text-align: center;
   margin-right: 10px;
   margin-top: 15px;
+  font-family: "Jersey 15", serif;
+  font-style: normal;
+  font-weight: 400;
+  
+}
+
+.progress-button:hover{
+  background-color: #6d4a2f;
+  transform: scale(1.05)
 }
 
 .tree-container {
@@ -51,13 +67,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px 0;
+  margin: 5px 0;
 }
 
 .tree-image {
   width: 150px; /* Default size */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 500px; /* Set a maximum width */
+  height: auto; /*Maintain aspect ratio*/
+  max-width: 100vh; /*Set a maximum width*/
   border-radius: 10px;
 }
 
@@ -65,6 +81,25 @@
   display: flex;
   justify-content: center; /* Center the buttons horizontally */
   
+}
+.instruction-container {
+  padding: 0px 40px; 
+}
+
+.instruction-container h3{
+  /* padding: 20px; */
+  font-family: "Jersey 15", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.instruction-container p{
+  /* padding: 20px; */
+  font-family: "Jersey 15", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .question-container {
@@ -83,6 +118,14 @@
   margin-bottom: 10px;
 }
 
+.question-popup {
+  background-color: #f9f9f9; /* Light background for the popup */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 100;
+}
+
 .question-container button {
   background-color: #4caf50;
   color: white;
@@ -91,8 +134,12 @@
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  font-family: "Jersey 15", serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .question-container button:hover {
   background-color: #45a049;
 }
+

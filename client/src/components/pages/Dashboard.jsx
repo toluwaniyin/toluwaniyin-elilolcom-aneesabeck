@@ -81,7 +81,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-all-container">
+    <div>
       <div
       className="background-image"
       style={{
@@ -90,7 +90,7 @@ const Dashboard = () => {
         left: 0,
         width: "100%",
         height: "100%",
-        backgroundImage: "url('/field.gif')",
+        backgroundImage: "url('/field (2).gif')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.7,
@@ -98,7 +98,7 @@ const Dashboard = () => {
       }}
     ></div>
       <NavBar />
-      <div className="dashboard-container">
+      <div className="dashboard-all-container">
         <div className="header">
           {userContext.userId != null && user && <Header username={user.name} />}
         </div>

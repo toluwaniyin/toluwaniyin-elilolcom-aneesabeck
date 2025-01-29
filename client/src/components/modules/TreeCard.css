@@ -1,45 +1,49 @@
 .tree-card {
-    background-color: #dcedc8;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: "Jersey 15", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+  background-color: #dcedc8;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  .tree-card p {
-    font-family: "Jersey 15", serif;
-    font-size: 18px;
-  }
-  .tree-card img{
-    max-height: 140px;
-    border-radius: 5px;
-  }
-  .tree-card img:hover{
-    transform: scale(1.05);
-  }
-  .tree-card:hover{
-    transform: scale(1.05);
-  }
-  .delete-button {
-    background-color: #8b5e3c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 17px;
-    font-family: "Jersey 15", serif;
-    font-weight: 400;
-    font-style: normal;
+.tree-card p {
+  font-family: "Jersey 15", serif;
+  font-size: 18px;
+}
 
-  }
-  
-  .delete-button:hover {
-    background-color: #785133;
-  }
+.tree-card img {
+  width: 100%; /* Make the image take up the full width of the container */
+  height: auto; /* Adjust the height automatically to maintain aspect ratio */
+  max-height: 140px; /* Limit the max height of the image */
+  border-radius: 5px;
+  transition: transform 0.3s ease; /* Smooth scaling effect on hover */
+}
 
- 
+.tree-card img:hover {
+  transform: scale(1.05); /* Scale the image slightly when hovered */
+}
+
+.tree-card:hover {
+  transform: scale(1.05); /* Scale the entire card slightly when hovered */
+}
+
+.delete-button {
+  background-color: #8b5e3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 17px;
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.delete-button:hover {
+  background-color: #785133;
+}

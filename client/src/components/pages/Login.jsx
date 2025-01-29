@@ -35,66 +35,42 @@ const LoginPage = () => {
           position: "absolute",
           width: "100%",
           height: "100vh",
-          backgroundImage: "url('/field.gif')",
+          backgroundImage: "url('/field (2).gif')",
           backgroundSize: "cover",
           opacity: 0.7,
           backgroundRepeat: "repeat-x",
-          // animation: "moveClouds 30s linear infinite",
           zIndex: 0,
         }}
       ></div>
+
+      {/* SkillGrow title */}
       <h1
-  style={{
-    zIndex: 1,
-    fontFamily: '"Berkshire Swash", serif',
-    fontSize: "100px",
-    color: "#4f772d",
-    textAlign: "center",
-    animation: "growText 1.5s ease-out forwards",
-    opacity: 0, // Ensures animation starts correctly
-  }}
->
-  SkillGrow
-</h1>
-
-<style>
-  {`
-    @keyframes growText {
-      0% {
-        transform: scale(0);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-  `}
-</style>
-      {/* Floating Login Image
-      <img
-        src="/loginimg.png"
-        alt="Login"
         style={{
-          width: "100vh", // Adjusted size
-          height: "auto",
-          animation: "floatUpDown 3s ease-in-out infinite",
           zIndex: 1,
+          fontFamily: '"Berkshire Swash", serif',
+          fontSize: "8vw", // Font size based on viewport width
+          color: "#4f772d",
+          textAlign: "center",
+          animation: "growText 1.5s ease-out forwards",
+          opacity: 0, // Ensures animation starts correctly
         }}
-      /> */}
-
-      {/* Google Login Button */}
-      <div style={{ zIndex: 1, marginTop: "20px" }}>
-        <GoogleLogin
-          onSuccess={handleLoginSuccess}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      </div>
+      >
+        SkillGrow
+      </h1>
 
       <style>
         {`
+          @keyframes growText {
+            0% {
+              transform: scale(0);
+              opacity: 0;
+            }
+            100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+
           /* Floating animation */
           @keyframes floatUpDown {
             0% { transform: translateY(0); }
@@ -106,6 +82,41 @@ const LoginPage = () => {
           @keyframes moveClouds {
             from { background-position: 0 0; }
             to { background-position: -100vw 0; }
+          }
+        `}
+      </style>
+
+      {/* Google Login Button */}
+      <div style={{ zIndex: 1, marginTop: "20px" }}>
+        <GoogleLogin
+          onSuccess={handleLoginSuccess}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+      </div>
+
+      {/* Media Queries for Responsiveness */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            h1 {
+              font-size: 10vw; /* Adjust font size for tablets */
+            }
+
+            .google-login-button {
+              margin-top: 10px; /* Adjust button spacing */
+            }
+          }
+
+          @media (max-width: 480px) {
+            h1 {
+              font-size: 12vw; /* Larger font size for smaller screens */
+            }
+
+            .google-login-button {
+              width: 90%; /* Make button width responsive */
+            }
           }
         `}
       </style>

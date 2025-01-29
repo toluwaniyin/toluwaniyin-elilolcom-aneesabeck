@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import treeGif from "tree_growing.gif";
+import treeGif from "loadingtree.gif";
 
 const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);

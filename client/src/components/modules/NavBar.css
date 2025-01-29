@@ -22,6 +22,7 @@
   font-family: "Berkshire Swash", serif;
   color: #f7f3e9;
   white-space: nowrap; /* Prevent text from wrapping */
+  text-decoration: none; 
 }
 
 /* Navigation Links */
@@ -108,6 +109,16 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .NavBar-container {
+    padding: 10px 15px; /* Slightly adjust padding for medium screens */
+  }
+
+  .NavBar-linkContainer {
+    gap: 10px; /* Slightly smaller gap between links */
+  }
+}
+
 @media (max-width: 768px) {
   .NavBar-linkContainer {
     display: none; /* Hide links on smaller screens */
@@ -125,5 +136,10 @@
 
   .NavBar-link button {
     font-size: 12px; /* Adjust button size for smaller screens */
+  }
+
+  .nav-menu {
+    width: 100%; /* Full width on mobile */
+    top: 50px; /* Adjust positioning to accommodate smaller screens */
   }
 }

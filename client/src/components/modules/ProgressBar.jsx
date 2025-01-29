@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./ProgressBar.css";
 import { get, post } from "../../utilities";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import Swal from 'sweetalert2';
+import '@sweetalert2/theme-dark/dark.css';
+
 
 const ProgressBar = ({ treeId }) => {
   const [progress, setProgress] = useState(0);
@@ -69,83 +74,95 @@ const ProgressBar = ({ treeId }) => {
     const currentStep = Math.floor(progress / 10) + 1;
     const currentAnswer = "A";
     if (currentAnswer === answers[currentStep]) {
-        const updatedProgress = progress + 10;
-        setProgress(updatedProgress);
-  
-        // POST progress
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-      } else {
-        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
-        setProgress(updatedProgress);
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-        toast.error("Incorrect answer. Try again!");
-      }
-      setShowQuestion(false);
-      setCurrentAnswer("");
-    };
+      const updatedProgress = progress + 10;
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+    } else {
+      const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect answer. Try again! Progress deducted by 10%.',
+      }); 
+    }
+    
+    setCurrentQuestion(null); // Ensure the popup closes by setting currentQuestion to null or ""
+    setShowQuestion(false); // Ensure that the popup closes
+    setCurrentAnswer(""); // Reset the current answer
+  };
   
   const handleBSubmit = () => {
     const currentStep = Math.floor(progress / 10) + 1;
     const currentAnswer = "B";
     if (currentAnswer === answers[currentStep]) {
-        const updatedProgress = progress + 10;
-        setProgress(updatedProgress);
+      const updatedProgress = progress + 10;
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+    } else {
+      const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect answer. Try again! Progress deducted by 10%.',
+      });  // Show the toast notification
+    }
   
-        // POST progress
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-      } else {
-        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
-        setProgress(updatedProgress);
-
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-        toast.error("Incorrect answer. Try again!");
-      }
-      setShowQuestion(false);
-      setCurrentAnswer("");
-    };
-
+    setCurrentQuestion(null); // Ensure the popup closes
+    setShowQuestion(false); // Ensure that the popup closes
+    setCurrentAnswer(""); // Reset the current answer
+  };
+  
   const handleCSubmit = () => {
     const currentStep = Math.floor(progress / 10) + 1;
     const currentAnswer = "C";
     if (currentAnswer === answers[currentStep]) {
-        const updatedProgress = progress + 10;
-        setProgress(updatedProgress);
+      const updatedProgress = progress + 10;
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+    } else {
+      const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
+      setProgress(updatedProgress);
+      post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
+        (updatedTreeResponse) => {
+          console.log("Progress updated:", updatedTreeResponse);
+        }
+      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect answer. Try again! Progress deducted by 10%.',
+      }); 
+    }
   
-        // POST progress
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-      } else {
-        const updatedProgress = Math.max(progress - 10, 0); // Deduct 10% progress, but not below 0
-        setProgress(updatedProgress);
-        post("/api/treeprogress", { treeId: treeId, progress: updatedProgress }).then(
-          (updatedTreeResponse) => {
-            console.log("Progress updated:", updatedTreeResponse);
-          }
-        );
-        toast.error("Incorrect answer. Try again!");
-      }
-      setShowQuestion(false);
-      setCurrentAnswer("");
-    };
+    setCurrentQuestion(null); // Ensure the popup closes
+    setShowQuestion(false); // Ensure that the popup closes
+    setCurrentAnswer(""); // Reset the current answer
+  };
+  
 
 // const handleAnswerChange = (event) => {
 //   setCurrentAnswer(event.target.value);
@@ -203,6 +220,7 @@ if (progress < 40) {
   // const currentAnswer = answers[currentStep];
 
   return (
+    
     <div className="progress-container">
       <div className="progress-bar">
         <div
@@ -222,12 +240,12 @@ if (progress < 40) {
         }}
       >
         <img
-          src="/grow2.png" // Replace with the path to your tree image
+          src="/grow.png" // Replace with the path to your tree image
           alt="Growing Tree"
           className="tree-image"
         />
       </div>
-
+        <div className="instruction-button-container">
       {showInstruction && (<div className="instruction-container">
         <h3>Step {currentStep}:</h3>
         <p>{currentInstruction}</p>
@@ -241,31 +259,31 @@ if (progress < 40) {
           Reset
         </button>
       </div>
-      {showQuestion && (
-        <div className="question-container">
-          <p>{currentQuestion}</p>
-          {/* <input
-            type="text"
-            placeholder="Enter your answer here"
-            value={currentAnswer}
-            onChange={handleAnswerChange}
-          /> */}
-          <p>Choose the correct answer:</p>
-          <div className="button-container"> 
-            <button className="progress-button" onClick={handleASubmit}>
-              A
-            </button>
-            <button className="progress-button" onClick={handleBSubmit}>
-              B
-            </button>
-            <button className="progress-button" onClick={handleCSubmit}>
-              C
-            </button>
+      </div>
+      <Popup
+        open={Boolean(currentQuestion)}
+        closeOnDocumentClick
+        onClose={() => setCurrentQuestion("")}
+      >
+        <div className="question-popup">
+          <div className="question-content">
+            <p>{currentQuestion}</p>
+            <p>Choose the correct answer:</p>
+            <div className="button-container">
+              <button className="progress-button" onClick={handleASubmit}>
+                A
+              </button>
+              <button className="progress-button" onClick={handleBSubmit}>
+                B
+              </button>
+              <button className="progress-button" onClick={handleCSubmit}>
+                C
+              </button>
+            </div>
           </div>
-          
         </div>
-      )}
-      <ToastContainer />
+      </Popup>
+      {/* <ToastContainer style={{ zIndex: 9999 }}/> */}
     </div>
   );
 };

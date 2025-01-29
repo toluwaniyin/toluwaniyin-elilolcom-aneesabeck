@@ -11,7 +11,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     return(
         <nav className="NavBar-container">
-            <div className="NavBar-title u-inlineBlock">SkillGrow</div>
+            <Link to="/dashboard" className="NavBar-title u-inlineBlock">SkillGrow</Link>
             <div className="NavBar-linkContainer u-inlineBlock">
                 <Link to= "/dashboard" className = "NavBar-link u-inlineBlock">
                 Dashboard

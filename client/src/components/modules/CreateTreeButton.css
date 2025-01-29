@@ -56,4 +56,68 @@
   .createTreeButton button:hover {
     background-color: #3a5a1c; /* darker green for hover */
   }
+
+  /* Customize the SweetAlert2 Popup */
+.swal2-popup {
+    font-family: "Jersey 15", serif;  /* Make it consistent with your app's font */
+    border-radius: 10px;  /* Rounded corners */
+    background-color: #f0f0f0;  /* Light background */
+    padding: 20px;  /* Add some padding */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow for depth */
+  }
+  
+  .swal2-title {
+    color: #333;  /* Dark text color */
+    font-size: 1.5em;  /* Title size */
+    margin-bottom: 10px;  /* Space between title and text */
+    
+  }
+  
+  .swal2-content {
+    color: #555;  /* Slightly lighter text color */
+    font-size: 1.1em;
+  }
+  
+  .swal2-confirm {
+    background-color: #8b5e3c;  /* Custom button color */
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+  }
+  
+  .swal2-cancel {
+    background-color: #f44336;  /* Custom cancel button color */
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+  }
+  
+  /* Style the input fields for better consistency */
+  input[type="text"], textarea {
+    font-family: "Jersey 15", serif; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #8b5e3c;
+    font-family: "Jersey 15", serif; 
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #634127;  /* Slightly darker green for hover effect */
+  }
+  
   
