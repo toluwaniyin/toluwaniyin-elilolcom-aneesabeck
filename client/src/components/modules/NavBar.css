@@ -1,37 +1,129 @@
-.NavBar-title {
-    color: #000;
-    font-size: 25px;
-    font-family: 'Times New Roman', Times, serif;
-}
-
+/* Navbar Container */
 .NavBar-container {
-    padding: 8px 16px;
-    background-color: #3F9B0B;
-    opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #4f772d; /* Earthy green */
+  color: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
+/* Logo / Title */
+.NavBar-title {
+  font-size: 24px; /* Slightly smaller for better fit */
+  font-weight: bold;
+  font-family: "Berkshire Swash", serif;
+  color: #f7f3e9;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
 
+/* Navigation Links */
 .NavBar-linkContainer {
-    margin-left: var(--l);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap; /* Allow wrapping of links on smaller screens */
+  font-family: "Berkshire Swash", serif;
+}
+
+/* Navbar Links */
+.NavBar-link,
+.NavBar-link:visited {
+  font-size: 16px;
+  font-family: "Berkshire Swash", serif;
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  white-space: nowrap; /* Prevent links from wrapping individually */
+}
+
+.NavBar-link:hover {
+  background-color: #304a19;
+}
+
+/* Active Page Highlight */
+.active {
+  background-color: #c5e1a5;
+  color: #2f7408;
+  font-weight: bold;
+}
+
+/* Logout Button */
+.NavBar-link button {
+  background: #8b5e3c;
+  font-family: "Berkshire Swash", serif;
+  color: white;
+  font-size: 14px;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.NavBar-link button:hover {
+  background: #6d442a;
+}
+
+/* Mobile Menu */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: #3f9b0b;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.nav-menu.open {
+  display: flex;
+}
+
+/* Hamburger Icon */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 3px 0;
+  border-radius: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .NavBar-linkContainer {
+    display: none; /* Hide links on smaller screens */
   }
-  
-  .NavBar-link,
-  .NavBar-link:visited {
-    color: #fff;
-    font-size: 20px;
-    /* opacity: 1 */
-    ;
-    text-decoration: none;
+
+  .menu-icon {
+    display: flex; /* Show menu icon for mobile */
   }
-  
-  .NavBar-link:hover {
-    opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .NavBar-title {
+    font-size: 20px; /* Adjust logo size for very small screens */
   }
-  
-  .NavBar-link.NavBar-login {
-    opacity: 1;
+
+  .NavBar-link button {
+    font-size: 12px; /* Adjust button size for smaller screens */
   }
-  
-  .NavBar-link + .NavBar-link {
-    margin-left: var(--m);
-  }
+}

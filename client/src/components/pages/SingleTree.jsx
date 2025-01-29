@@ -21,12 +21,13 @@ const SingleTreeDetail = (props) => {
         <NavBar />
         <div className="single-tree-container">
         <div className="single-tree-content">
+          <h2>Grow your {treeName} Tree!</h2>
             <div className="single-tree-card">
-            <h2>Progress: </h2>
+            {/* <h2>Progress: </h2> */}
             <ProgressBar treeId={treeId} />
             
             </div>
-            <h2>Tree Name: {treeName}</h2>
+            
         </div>
         </div>
     </div>

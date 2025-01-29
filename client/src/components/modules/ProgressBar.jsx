@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ProgressBar.css";
 import { get, post } from "../../utilities";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProgressBar = ({ treeId }) => {
   const [progress, setProgress] = useState(0);
@@ -84,7 +86,7 @@ const ProgressBar = ({ treeId }) => {
             console.log("Progress updated:", updatedTreeResponse);
           }
         );
-        alert("Incorrect answer. Try again!");
+        toast.error("Incorrect answer. Try again!");
       }
       setShowQuestion(false);
       setCurrentAnswer("");
@@ -112,7 +114,7 @@ const ProgressBar = ({ treeId }) => {
             console.log("Progress updated:", updatedTreeResponse);
           }
         );
-        alert("Incorrect answer. Try again!");
+        toast.error("Incorrect answer. Try again!");
       }
       setShowQuestion(false);
       setCurrentAnswer("");
@@ -139,7 +141,7 @@ const ProgressBar = ({ treeId }) => {
             console.log("Progress updated:", updatedTreeResponse);
           }
         );
-        alert("Incorrect answer. Try again!");
+        toast.error("Incorrect answer. Try again!");
       }
       setShowQuestion(false);
       setCurrentAnswer("");
@@ -263,6 +265,7 @@ if (progress < 40) {
           
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

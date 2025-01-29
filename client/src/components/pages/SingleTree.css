@@ -64,3 +64,15 @@
     background-color: #45a049;
   }
   
+  /* Tree Image Animations */
+.tree-image {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  transform-origin: center;
+  transition: transform 0.5s ease-in-out;
+}
+
+.tree-image:hover {
+  transform: scale(1.1) rotate(5deg);
+}

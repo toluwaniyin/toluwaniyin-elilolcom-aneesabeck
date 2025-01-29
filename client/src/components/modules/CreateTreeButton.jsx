@@ -1,17 +1,18 @@
 import React, { useState, useContext } from "react";
 import { post } from "../../utilities";
 import { UserContext } from "../App.jsx";
-
+import { ToastContainer, toast } from 'react-toastify';
+import "./CreateTreeButton.css";
 
 export const HandleCreateTree = (props) => {
   const userContext = useContext(UserContext)
   const addTree = (treeName, learningTopic, customText) => {
     if (!treeName) {
-      alert(`Enter a name for your tree`);
+      toast.error(`Enter a name for your tree`);
       return;
     }
     if (props.existingTrees.includes(treeName)) {
-      alert(`Tree "${treeName}" already exists.`);
+      toast.error(`Tree "${treeName}" already exists.`);
       return; // Exit early if treeName exists
     }
     const body = { name: treeName, userid: userContext.userId, progress: 0, learningTopic: learningTopic, customText: customText}; // fill in body with value
@@ -19,7 +20,12 @@ export const HandleCreateTree = (props) => {
 
     post("/api/tree", body).then((tree) => props.createTree(tree));
   };
-  return <CreateTreeButton onSubmit={addTree} />;
+  return (
+    <>
+      <CreateTreeButton onSubmit={addTree} />
+      <ToastContainer />
+    </>
+  );
 };
 
 export const CreateTreeButton = (props) => {
@@ -52,7 +58,7 @@ export const CreateTreeButton = (props) => {
             checked={inputType === "learningTopic"}
             onChange={() => setInputType("learningTopic")}
           />
-          AI Learning
+          AI Mode
         </label>
         <label>
           <input
@@ -61,13 +67,13 @@ export const CreateTreeButton = (props) => {
             checked={inputType === "customText"}
             onChange={() => setInputType("customText")}
           />
-          Custom Text
+          Self Mode
         </label>
       </div>
       {inputType === "learningTopic" && (
         <input
           type="text"
-          placeholder="What do you want to learn?"
+          placeholder="I want to learn..."
           value={learningTopic}
           onChange={(e) => setLearningTopic(e.target.value)}
         />

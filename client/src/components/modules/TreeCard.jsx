@@ -12,14 +12,15 @@ const TreeCard = (props) => {
 
   return (
     <div className="tree-card-container">
-      <div className="tree-card" onClick={handleTreeCard}>
-        <img src={props.treeImgSrc} />
+      <div className="tree-card" >
+        <img src={props.treeImgSrc} onClick={handleTreeCard}/>
         <p>{props.name}</p>
         <p>progress: {props.progress}%</p>
-      </div>
-      <button className="delete-button" onClick={props.onDelete}>
+        <button className="delete-button" onClick={props.onDelete}>
         Delete Tree
       </button>
+      </div>
+      
     </div>
   );
 };

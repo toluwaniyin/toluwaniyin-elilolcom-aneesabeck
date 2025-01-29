@@ -4,6 +4,7 @@ import App from "./components/App";
 import NotFound from "./components/pages/NotFound";
 import LoginPage from "./components/pages/Login";
 import Friends from "./components/pages/Friends";
+import Header from "./components/modules/Header";
 
 import {
   createBrowserRouter,
@@ -23,8 +24,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/dashboard" element={<Dashboard />}/>
-      <Route path="/tree/:treeId" element ={<SingleTree />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/tree/:treeId" element={<SingleTree />} />
+      <Route path="/community" element={<Friends />} />
     </Route>
   )
 );

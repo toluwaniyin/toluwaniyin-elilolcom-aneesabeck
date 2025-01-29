@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { get } from "../../utilities";
-
+import { UserContext } from "../App.jsx";
+import NavBar from "../modules/NavBar.jsx";
 
 //GET request for leaderboard
 const Friends = () => {
@@ -21,6 +22,7 @@ const Friends = () => {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
+      <NavBar />
       <h1 className="text-4xl font-bold mb-8 text-center">Community Leaderboard</h1>
 
       <div className="bg-white shadow-lg rounded-lg p-6">

@@ -1,0 +1,18 @@
+.dashboard-header {
+    /* background: #8b5e3c; Soft green gradient */
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); */
+    text-align: left;
+    /* margin-bottom: 20px; */
+  }
+  
+  .dashboard-header h1 {
+    color: #8b5e3c; /* Deep green for the main header */
+    font-size: 50px;
+    font-family: "Jersey 15", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+
+  }

@@ -9,6 +9,7 @@ import { socket } from "../client-socket";
 import { get, post } from "../utilities";
 
 export const UserContext = createContext(null);
+import "./App.css";
 
 /**
  * Define the "App" component
@@ -54,7 +55,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="App-container">
       <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
         <Outlet />
       </UserContext.Provider>

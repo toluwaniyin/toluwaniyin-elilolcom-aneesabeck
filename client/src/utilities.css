@@ -15,7 +15,10 @@
 */
 
 /* TODO: REPLACE WITH YOUR OWN FONT! */
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Jersey+10&family=Jersey+15&family=Lobster+Two&family=Peralta&family=Pixelify+Sans:wght@400..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --primary: #396dff;
@@ -34,8 +37,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
+  font-family: "Loabster Two", sans-serif; 
+  /* /* font-weight: 300; */
 }
 
 form {

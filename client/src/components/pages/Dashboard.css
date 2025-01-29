@@ -1,68 +1,86 @@
-.dashboard-header {
-    padding: 8px 16px;
-    color: #3F9B0B;
+.dashboard {
+  background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
+  height: 100vh; /* Ensure that the dashboard takes the full height of the viewport */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.dashboard-all-container {
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 .dashboard-container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f9f9f9;
-    color: #333;
-    text-align: center;
+  padding: 5px;
+  height: 100%; /* Make it take up the full height of the parent container */
+  background: linear-gradient(to bottom, #d1edf2, #e6f7fb);
+  justify-content: center;
+  align-items: center;
+  font-family: "Jersey 15", serif;
+  overflow: hidden; /* Prevent scrolling */
 }
 
-.dashboard-trees {
-
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  overflow: hidden; /* Prevent scrolling */
 }
 
-.dashboard-stats {
-
+.create-tree-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px; /* Adjust width as needed */
+  padding: 20px;
+  border-radius: 12px;
+  margin-right: 20px;
 }
 
-.dashboard-button {
-
+.streak-box {
+  width: 75%;
+  padding: 15px;
+  text-align: center;
+  background: #8b5e3c;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-style: normal;
 }
-.stats-section, .trees-section {
-    flex: 1;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .stats-section {
-    flex: 1;
-    background-color: #836539;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .trees-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    justify-content: center;
-  }
-  
-  .tree-card {
-    background-color: #dcedc8;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tree-card:hover {
-    background-color: #c5e1a5;
-  }
 
-  .create-tree-button {
-    background-color: #c5e1a5;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.streak-box:hover {
+  transform: scale(1.05);
+}
 
+.header {
+  padding: 20px;
+}
+
+.create-tree-button {
+  width: 100%;
+}
+
+.trees-section {
+  flex-grow: 1;
+  padding: 20px;
+  background: rgba(139, 94, 60, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Prevent scrolling */
+}
+
+.trees-section h1 {
+  color: #4b3a2a;
+  text-align: center;
+}
+
+.trees-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
