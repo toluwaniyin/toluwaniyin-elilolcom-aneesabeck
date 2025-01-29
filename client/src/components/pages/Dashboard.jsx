@@ -105,7 +105,7 @@ const Dashboard = () => {
 
         <div className="dashboard-content">
           <div className="create-tree-section">
-            <div className="streak-box">Streak: {streak} days</div>
+            <div className="streak-box">Streak: {streak} day{streak !== 1 ? 's' : ''}</div>
             <div className="create-tree-button">
               <HandleCreateTree
                 existingTrees={trees.map((tree) => tree.name)}
