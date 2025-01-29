@@ -2,9 +2,8 @@ import React, { useState, useContext } from "react";
 import { post } from "../../utilities";
 import { UserContext } from "../App.jsx";
 
-
 export const HandleCreateTree = (props) => {
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
   const addTree = (treeName, learningTopic, customText) => {
     if (!treeName) {
       alert(`Enter a name for your tree`);
@@ -14,11 +13,20 @@ export const HandleCreateTree = (props) => {
       alert(`Tree "${treeName}" already exists.`);
       return; // Exit early if treeName exists
     }
-    const body = { name: treeName, userid: userContext.userId, progress: 0, learningTopic: learningTopic, customText: customText}; // fill in body with value
+    const body = {
+      name: treeName,
+      userid: userContext.userId,
+      progress: 0,
+      learningTopic: learningTopic,
+      customText: customText,
+      username: userContext.username,
+    }; // fill in body with value
     // // props.createNewTree({_id: })
 
     post("/api/tree", body).then((tree) => props.createTree(tree));
   };
+  console.log("UserContext:", userContext);
+
   return <CreateTreeButton onSubmit={addTree} />;
 };
 

@@ -8,7 +8,53 @@ import { socket } from "../client-socket";
 
 import { get, post } from "../utilities";
 
+import { AnimatePresence } from "framer-motion";
+
 export const UserContext = createContext(null);
+
+const LoadingScreen = ({ onComplete }) => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          onComplete(); // Notify App that loading is complete
+        }
+        return prev + 1;
+      });
+    }, 30); // Adjust the speed of the progress bar
+    return () => clearInterval(interval);
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="loading-screen"
+    >
+      <div className="loading-container">
+        <img
+          src="/loadingtree.gif"
+          style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+        />
+        <div className="loading-bar-wrapper" style={{ marginLeft: 400, marginRight: 400 }}>
+          <div
+            className="loading-bar"
+            style={{
+              width: `${progress}%`,
+              height: "8px",
+              backgroundColor: "#4caf50",
+              borderRadius: "4px",
+            }}
+          ></div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 /**
  * Define the "App" component
@@ -16,6 +62,7 @@ export const UserContext = createContext(null);
 const App = () => {
   const [trees, setTrees] = useState([]);
   const [userId, setUserId] = useState(undefined);
+  const [userName, setUserName] = useState(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,13 +100,33 @@ const App = () => {
     setTrees,
   };
 
-  return (
-    <div>
-      <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
-        <Outlet />
-      </UserContext.Provider>
-    </div>
-  );
-};
+    return (
+      <div>
+        <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
+          <Outlet />
+        </UserContext.Provider>
+      </div>
+    );
+  };
+
+//   return (
+//     <UserContext.Provider value={authContextValue}>
+//       <AnimatePresence mode="wait">
+//         {isLoading ? (
+//           <LoadingScreen key="loading" onComplete={handleLoadingComplete} />
+//         ) : (
+//           <motion.div
+//             key="app-content"
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             exit={{ opacity: 0 }}
+//           >
+//             <Outlet />
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </UserContext.Provider>
+//   );
+// };
 
 export default App;

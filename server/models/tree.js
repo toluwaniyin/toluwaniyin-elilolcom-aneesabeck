@@ -2,7 +2,6 @@
 // models: constructors that we desfine
 // to apply it to our collection
 
-
 const mongoose = require("mongoose");
 
 const TreeSchema = new mongoose.Schema({
