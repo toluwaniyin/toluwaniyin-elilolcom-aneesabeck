@@ -42,21 +42,37 @@
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  font-size: 24px;
-  height: 40px;
-  width: 20%; /* Ensure it takes up available space */
+  font-size: 20px; /* Adjust font size */
+  padding: 12px 20px; /* Adjust padding to fit text */
+  min-width: 150px; /* Ensures button isn't too small */
+  max-width: 100%; /* Ensures responsiveness */
   text-align: center;
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center text horizontally */
-  align-items: center; /* Center text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 10px;
   margin-top: 15px;
   font-family: "Jersey 15", serif;
   font-style: normal;
   font-weight: 400;
-  border: none; /* Uncomment if needed */
-  padding: 10px; /* Ensure padding doesn't interfere */
+  border: none;
+  transition: transform 0.2s ease-in-out;
 }
+
+/* Ensure it resizes properly on small screens */
+@media (max-width: 480px) {
+  .progress-button {
+    width: auto; /* Ensures it takes appropriate width */
+    min-width: 120px; /* Reduces min size for smaller screens */
+    font-size: 18px; /* Slightly smaller font for mobile */
+  }
+}
+
+.progress-button:hover {
+  background-color: #6d4a2f;
+  transform: scale(1.05);
+}
+
 
 .progress-button:hover {
   background-color: #6d4a2f;
