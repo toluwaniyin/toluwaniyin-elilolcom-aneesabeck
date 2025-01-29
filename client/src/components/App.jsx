@@ -47,7 +47,7 @@ const LoadingScreen = ({ onComplete }) => {
     >
       <div className="loading-container" style={{ textAlign: "center" }}>
         <img
-          src="client/growing-tree-unscreen.gif"
+          src="/growing-tree-unscreen.gif"
           style={{ maxWidth: "100%", height: "auto" }}
         />
         <div
