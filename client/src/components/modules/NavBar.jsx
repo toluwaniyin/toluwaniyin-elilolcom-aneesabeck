@@ -16,6 +16,9 @@ const NavBar = () => {
                 <Link to= "/dashboard" className = "NavBar-link u-inlineBlock">
                 Dashboard
                 </Link>
+                <Link to= "/community" className = "NavBar-link u-inlineBlock">
+                Leaderboard
+                </Link>
                 <div className = "NavBar-link u-inlineBlock">
                 <button
                 onClick={() => {

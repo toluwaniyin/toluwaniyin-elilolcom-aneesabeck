@@ -1,5 +1,5 @@
 .dashboard {
-  background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
+  /* background: linear-gradient(to bottom, #87CEEB, #f0f8ff); */
   height: 100vh; /* Ensure that the dashboard takes the full height of the viewport */
   overflow: hidden; /* Prevent scrolling */
 }
@@ -12,7 +12,7 @@
 .dashboard-container {
   padding: 5px;
   height: 100%; /* Make it take up the full height of the parent container */
-  background: linear-gradient(to bottom, #d1edf2, #e6f7fb);
+  /* background: linear-gradient(to bottom, #d1edf2, #e6f7fb); */
   justify-content: center;
   align-items: center;
   font-family: "Jersey 15", serif;

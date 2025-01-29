@@ -1,4 +1,3 @@
-const GrowWithFriends = () => {
 import React, { useState, useEffect, useContext } from "react";
 import { get } from "../../utilities";
 import { UserContext } from "../App.jsx";

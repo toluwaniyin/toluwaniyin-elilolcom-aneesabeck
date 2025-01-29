@@ -75,6 +75,7 @@ import { get } from "../../utilities";
 import { UserContext } from "../App.jsx";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use"; // Helps with confetti size
+import NavBar from "../modules/NavBar.jsx";
 
 const Friends = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -117,6 +118,8 @@ const Friends = () => {
   }, [userRank]);
 
   return (
+    <div>
+        <NavBar />
     <div className="flex items-center justify-center min-h-screen bg-[#DED0BA] relative">
       {/* Confetti burst when user is in top 3 */}
       {showConfetti && <Confetti width={width} height={height} numberOfPieces={250} />}
@@ -171,6 +174,8 @@ const Friends = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

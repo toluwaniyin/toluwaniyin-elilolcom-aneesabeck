@@ -16,3 +16,12 @@
     margin: 0;
 
   }
+  .dashboard-header p{
+    color: #8b5e3c; /* Deep green for the main header */
+    font-size: 20px;
+    font-family: "Jersey 15", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 5px;
+
+  }

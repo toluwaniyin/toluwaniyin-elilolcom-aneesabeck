@@ -4,7 +4,7 @@ import App from "./components/App";
 import Skeleton from "./components/pages/Skeleton";
 import NotFound from "./components/pages/NotFound";
 import LoginPage from "./components/pages/Login";
-import GrowWithFriends from "./components/pages/GrowWithFriends";
+import Friends from "./components/pages/GrowWithFriends";
 import Header from "./components/modules/Header";
 
 import {
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}/>
       <Route path="/tree/:treeId" element ={<SingleTree />} />
-      <Route path="/community" element={<GrowWithFriends />} />
+      <Route path="/community" element={<Friends />} />
     </Route>
   )
 );

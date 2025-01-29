@@ -102,8 +102,7 @@ const App = () => {
   };
 
   return (
-    <div className="App-container"></div>
-    <div>
+    <div className="App-container">
       <UserContext.Provider value={{ userId: userId, handleLogin, handleLogout }}>
         <Outlet />
       </UserContext.Provider>
