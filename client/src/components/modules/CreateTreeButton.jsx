@@ -26,6 +26,15 @@ export const HandleCreateTree = (props) => {
       });
       return; // Exit early if treeName exists
     }
+
+    if (customText.length > 6000) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Custom text exceeds 6000 characters. Please shorten it.',
+      });
+      return; // Prevent further action if validation fails
+    }
     const body = {
       name: treeName,
       userid: userContext.userId,
