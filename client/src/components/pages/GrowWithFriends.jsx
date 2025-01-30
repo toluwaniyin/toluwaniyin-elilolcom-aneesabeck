@@ -58,64 +58,59 @@ const Friends = () => {
       {/* Confetti burst when user is in top 3 */}
       {showConfetti && <Confetti width={width} height={height} numberOfPieces={250} />}
 
-      <div className="p-12 max-w-6xl w-full bg-[#F4EDE4] rounded-xl shadow-lg">
-        <h1 className="text-6xl font-jersey text-[#5A752F] mb-10 text-center">
-          🌿 Community Leaderboard 🌿
-        </h1>
+      <div className="bg-[#D3B898] shadow-lg rounded-lg p-10 border border-[#8B5E3B] max-w-full overflow-x-auto">
+  <h2 className="text-4xl font-jersey text-[#5A752F] mb-8 text-center">
+    Leaderboard
+  </h2>
 
-        <div className="bg-[#D3B898] shadow-lg rounded-lg p-10 border border-[#8B5E3B]">
-          <h2 className="text-4xl font-jersey text-[#5A752F] mb-8 text-center">
-            Leaderboard
-          </h2>
+  <div className="overflow-auto max-h-[45vh]"> {/* Scrollable container */}
+    <table className="w-full border-collapse border border-[#8B5E3B] rounded-lg overflow-hidden">
+      <thead>
+        <tr className="bg-[#5A752F] text-white text-2xl font-jersey">
+          <th className="border border-[#8B5E3B] px-8 py-4 text-center">Rank</th>
+          <th className="border border-[#8B5E3B] px-8 py-4 text-left">User</th>
+          <th className="border border-[#8B5E3B] px-8 py-4 text-left">🌳 Trees</th>
+          <th className="border border-[#8B5E3B] px-8 py-4 text-left">🌱 Total Progress</th>
+        </tr>
+      </thead>
+      <tbody>
+        {leaderboard.map((user, index) => {
+          const isCurrentUser = user.userid === userContext.userId;
+          const rankDisplay =
+            index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1;
 
-          <table className="w-full border-collapse border border-[#8B5E3B] rounded-lg overflow-hidden">
-            <thead>
-              <tr className="bg-[#5A752F] text-white text-2xl font-jersey">
-                <th className="border border-[#8B5E3B] px-8 py-4 text-center">Rank</th>
-                <th className="border border-[#8B5E3B] px-8 py-4 text-left">User</th>
-                <th className="border border-[#8B5E3B] px-8 py-4 text-left">🌳 Trees</th>
-                <th className="border border-[#8B5E3B] px-8 py-4 text-left">🌱 Total Progress</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboard.map((user, index) => {
-                const isCurrentUser = user.userid === userContext.userId;
+          return (
+            <tr
+              key={index}
+              className={`transition-all text-xl ${
+                isCurrentUser
+                  ? "bg-[#C8A97E] font-semibold shadow-md scale-[1.02]"
+                  : index % 2 === 0
+                  ? "bg-[#F4EDE4]"
+                  : "bg-[#E2D5C4]"
+              }`}
+            >
+              <td className="border border-[#8B5E3B] px-8 py-4 text-center font-bold">
+                {rankDisplay}
+              </td>
+              <td className="border border-[#8B5E3B] px-8 py-4 text-2xl font-jersey font-normal">
+                {user.name || "???"}
+              </td>
+              <td className="border border-[#8B5E3B] px-8 py-4 text-green-700 text-xl">
+                {user.treeCount} 🌳
+              </td>
+              <td className="border border-[#8B5E3B] px-8 py-4 text-green-600 text-xl">
+                {user.totalProgress}%
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                // Replace ranks 1, 2, 3 with medals
-                const rankDisplay =
-                  index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1;
-
-                return (
-                  <tr
-                    key={index}
-                    className={`transition-all text-xl ${
-                      isCurrentUser
-                        ? "bg-[#C8A97E] font-semibold shadow-md scale-[1.02]" // Highlight current user
-                        : index % 2 === 0
-                        ? "bg-[#F4EDE4]"
-                        : "bg-[#E2D5C4]"
-                    }`}
-                  >
-                    <td className="border border-[#8B5E3B] px-8 py-4 text-center font-bold">
-                      {rankDisplay}
-                    </td>
-                    <td className="border border-[#8B5E3B] px-8 py-4 text-2xl font-jersey font-normal">
-                      {user.name || "???"}
-                    </td>
-                    <td className="border border-[#8B5E3B] px-8 py-4 text-green-700 text-xl">
-                      {user.treeCount} 🌳
-                    </td>
-                    <td className="border border-[#8B5E3B] px-8 py-4 text-green-600 text-xl">
-                      {user.totalProgress}%
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
       </div>
-    </div>
     </div>
 
   );
