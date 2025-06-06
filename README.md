@@ -1,93 +1,88 @@
-# How to code a webapp with this skeleton
+# SkillGrow 🌱
 
-## Initial setup
+SkillGrow is a web application designed to help users track their skill-building journey in a fun and engaging way. Users can log in with Google, visualize their progress through interactive "trees," and stay motivated by competing with friends on a leaderboard.
 
-All teammates will need (explained in weblab.is/hw0)
+---
 
-- A bash console (on Mac or Linux, this is Terminal. On Windows, we recommend Git Bash)
-- NodeJS version 18. If it is installed correctly, typing "node --version" should give v18.13.0 and "npm --version" should give 8.19.3, or higher.
-- Visual Studio Code (or another code editor)
-- the Prettier VSCode extension
+## 🌟 Features
 
-Also, all of you will need to go through the MongoDB Atlas setup (https://bit.ly/mongo-setup).
+- 🔐 **Google OAuth Login** – Secure authentication via Google.
+- 🌳 **Progress Trees** – Tasks are represented as trees that grow as users progress.
+- 📈 **Dashboard** – Real-time overview of personal stats and streaks.
+- 🏆 **Leaderboard** – Compare your growth with friends.
+- 📱 **Responsive Design** – Seamless experience across devices.
 
-Additionally for authentication, one of you will need to obtain a CLIENT_ID, instructions are at https://bit.ly/gauth-mit.
+---
 
-## Downloading these files
+## 🛠️ Technologies Used
 
-First, you probably have a team repository somewhere (the link looks like: https://github.com/weblab-class/teammate1-teammate2-teammate3). You each should clone this (empty) repository by navigating to where you want your folder to be (**NOT in catbook**) and typing: git clone https://github.com/weblab-class/teammate1-teammate2-teammate3.git <-- with the correct link.
+### Frontend
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Socket.io](https://socket.io/) (for real-time updates)
 
-Then, one of your team members will need to do the following:
+### Backend
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Google OAuth](https://developers.google.com/identity)
 
-First on GitHub, download the skeleton (this repository) as a zip file, by clicking Code -> Download as ZIP. (Do not clone it, since this will download extra files, like .git, which will lead to GitHub being confused).
+---
 
-Then, drag over all of the files in this skeleton into your team's folder. **Make sure to also drag over the hidden files!** To see these hidden files, navigate to the skeleton in Finder/File Explorer and press command+shift+period (mac) or View > Show > Hidden items (windows).
+## 📁 Project Structure
 
-The files/folders you must drag over are:
+root/
+├── client/ # Frontend code
+│ ├── src/
+│ │ ├── components/ # React components
+│ │ ├── client-socket.js # Socket.io client setup
+│ │ └── utilities.js # Helper functions
+│ └── ...
+├── server/ # Backend code
+│ ├── models/ # Mongoose models
+│ ├── server.js # Main backend entry
+│ ├── auth.js # Google OAuth logic
+│ └── server-socket.js # Socket.io server logic
+├── .env # Environment variables (not in repo)
+├── package.json
+├── vite.config.js
+└── tailwind.config.js
 
-- .gitignore (hidden)
-- .npmrc (hidden)
-- .prettierrc (hidden)
-- client (folder)
-- package-lock.json
-- package.json
-- README.md
-- server (folder)
-- vite.config.js
 
-Additionally, you must create a .env file in the root directory. See .env.example for an example of what this file should look like.
 
-Then, in terminal, navigate to your teams folder and push all of the files to your team's GitHub repository as usual:
 
-- git add -A
-- git commit -m "Skeleton code"
-- git push
+---
 
-Now the rest of your teammates can pull all these files with a 'git pull'!
+## ⚙️ Setup Instructions
 
-Post on Piazza if you run into any issues
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
 
-## What you need to change in the skeleton
 
-- Change the Frontend CLIENT_ID (Skeleton.js) to your team's CLIENT_ID (obtain this at https://bit.ly/gauth-mit)
-- Change the Server CLIENT_ID to the same CLIENT_ID (auth.js)
-- Change the Database SRV (mongoConnectionURL) for Atlas (server.js). You got this in the MongoDB setup. remember to replace <password> and <dbname> (should be no < or > in your SRV) (From: https://bit.ly/mongo-setup)
-- Change the Database Name for MongoDB to whatever you put in the SRV to replace <dbname> (server.js)
-- (Optional) Add a favicon to your website at the path client/dist/favicon.ico
-- (Optional) Update website title in client/dist/index.html
-- (Optional) Update this README file ;)
-- (Optional) Update the package.json file with your app name :) (line 2)
+Install Dependencies
 
-## How to run this skeleton
+npm install
 
-First, 'npm install'
-Then open two separate terminals, and 'npm run dev' in the first, and 'npm start' in the second.
-Then open http://localhost:5173
+Set Up Environment Variables
 
-<!-- ## How to go from this skeleton to your actual app
+Create a .env file in the root directory.
 
-Check out this [How to Get Started Guide](http://weblab.is/get-started) -->
+Add the following variables:
+CLIENT_ID=<your-google-oauth-client-id>
+MONGO_URI=<your-mongodb-connection-string>
 
-## Socket stuff
 
-Note: we'll be getting to this in lecture in week 2, so don't worry if you don't know it yet
+🚀 How to Run
+Start the Backend Server
+npm start
 
-- If you're not using realtime updating or don't need server->client communication, you can remove socket entirely! (server-socket.js, client-socket.js, and anything that imports them)
-- If you are using sockets, consider what you want to do with the FIXME in server-socket.js
+Start the Frontend Development Server
+npm run dev
 
-## Edit at your own risk
+Access the Application
 
-the following files students do not need to edit. feel free to read them if you would like.
-
-```
-client/src/utilities.js
-client/src/client-socket.js
-server/validator.js
-server/server-socket.js
-.npmrc
-.prettierrc
-package-lock.json
-vite.config.js
-```
-
-## Good luck on your project :)
+Open your browser and navigate to: http://localhost:5173
